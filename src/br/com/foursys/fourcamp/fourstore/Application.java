@@ -12,6 +12,7 @@ public class Application {
 		System.out.println("cheguei teste");
 		System.out.println("cheguei teste");
 		System.out.println("cheguei teste");
+		System.out.println("teste");
 	}
 
 }
