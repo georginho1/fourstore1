@@ -8,11 +8,7 @@ public class Application {
 		MainMenu menu = new MainMenu();
 		
 		menu.mainMenu();
-		System.out.println("cheguei teste");
-		System.out.println("cheguei teste");
-		System.out.println("cheguei teste");
-		System.out.println("cheguei teste");
-		System.out.println("teste");
+		
 	}
 
 }
