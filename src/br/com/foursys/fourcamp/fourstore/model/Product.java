@@ -141,5 +141,13 @@ public class Product {
 		this.type = sku.substring(10, 12);
 		this.size = sku.substring(12, 14);
 	}
+	//excluir
+	@Override
+	public String toString() {
+		return "Product [sku=" + sku + ", id=" + id + ", description=" + description + ", type=" + type + ", size="
+				+ size + ", color=" + color + ", category=" + category + ", season=" + season + ", quantity=" + quantity
+				+ ", purchasePrice=" + purchasePrice + ", salePrice=" + salePrice + "]\n\n";
+	}
 
+	
 }
