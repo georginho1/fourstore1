@@ -49,8 +49,13 @@ public class Sale {
 	public void setPaymentMethod(PaymentMethod paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "\nVenda para o cliente: "+ client
+		     + "\nProdutos: " + products
+		     + "\nValor total: " + amountValue
+		     + "\nMétodo de pagamento: " + paymentMethod;
+	}
 	
 } 

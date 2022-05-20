@@ -2,6 +2,8 @@ package br.com.foursys.fourcamp.fourstore.communication;
 
 import java.util.Scanner;
 
+import br.com.foursys.fourcamp.fourstore.controller.SaleController;
+
 public class MainMenu {
 
 	public void mainMenu() {
@@ -46,6 +48,8 @@ public class MainMenu {
 	private void menuSales() {
 		int option = -1;
 		
+		SaleController saleController = new SaleController();
+		
 		while(option != 0) {
 			System.out.println("1 - Realizar Venda"
 					+ "\n2 - Consultar uma venda"
@@ -58,11 +62,14 @@ public class MainMenu {
 				break;
 			}
 			case 1:{
-			//	saleConsultation(); metodo para consultar venda
+				// => Precisa dos dados da venda.
+				// saleRegister(); metodo para consultar venda
+				saleController.saleRegister(null);
 				break;
 			}
-			case 2:{
-			//saleRegister(); metodo para realizar venda
+			case 2:{ 
+				// saleConsultation(); metodo para consultar venda
+				System.out.println(saleController.saleConsultation());
 				break;
 			}
 			default:
