@@ -7,10 +7,9 @@ import br.com.foursys.fourcamp.fourstore.model.Sale;
 
 public class SaleService {
 	
-	public boolean saveSale(Sale sale) {
+	public void saveSale(Sale sale) {
 		SaleData saleData = new SaleData();
 		saleData.save(sale);
-		return true;
 	}
 	
 	public List<Sale> listSale() {

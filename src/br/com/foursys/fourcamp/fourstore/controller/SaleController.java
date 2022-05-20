@@ -9,13 +9,9 @@ public class SaleController {
 	
 	public String saleRegister(Sale sale) {
 		String retorno = "";
-		if(saleService.saveSale(sale)) {
-			retorno = "Venda registrada com sucesso!";
-			return retorno;
-		} else {
-			retorno = "Está venda não pode ser registrada";
-			return retorno;
-		}
+		saleService.saveSale(sale);
+		retorno = "Venda registrada com sucesso!";
+		return retorno;
 	}
 	
 	public String saleConsultation() {
