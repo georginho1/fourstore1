@@ -1,5 +1,6 @@
 package br.com.foursys.fourcamp.fourstore.communication;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import br.com.foursys.fourcamp.fourstore.controller.SaleController;
@@ -64,7 +65,26 @@ public class MainMenu {
 				case 1:{
 				    // => Precisa dos dados da venda.
 					// saleRegister(); metodo para consultar venda
-					System.out.println(saleController.saleRegister(null, null, null, null));
+					
+					//TESTE
+//					Client clienteTeste = new Client("João", "12312312312", "chavePix");
+//					
+//					Product teste1 = new Product("14331160909251", "Camiseta do Batman", 48, 48.50, 92.80);
+//					Product teste2 = new Product("15342230609352", "Camiseta do Aquamen", 95, 38.50, 62.80);
+//					Product teste3 = new Product("16333330609454", "Camiseta do Flesh", 27, 25.50, 42.80);	
+//					
+//					ArrayList<Product> listaTeste = new ArrayList<Product>();
+//					
+//					listaTeste.add(teste1);
+//					listaTeste.add(teste2);
+//					listaTeste.add(teste3);
+					
+//					PaymentMethod metodoPagamentoTeste = null;
+//					metodoPagamentoTeste = metodoPagamentoTeste.PIX;
+
+					//FIM DO TESTE
+					String resultado = saleController.saleRegister(null, null, null, null);
+					System.out.println(resultado);
 					break;
 				}
 				case 2:{

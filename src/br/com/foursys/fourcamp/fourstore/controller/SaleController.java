@@ -14,7 +14,12 @@ public class SaleController {
 	
 	public String saleRegister(Client client, List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
 		String retorno = "";
+		
+		
 		Sale sale = new Sale(client, products, amountValue, paymentMethod);
+		
+		//verificarEstoque(List<products>) em service
+		
 		saleService.saveSale(sale);
 		retorno = "Venda registrada com sucesso!";
 		return retorno;
@@ -22,7 +27,7 @@ public class SaleController {
 	
 	public String saleConsultation() {
 		String retorno = "";
-		if(saleService.listSale() == null) {
+		if(saleService.listSale().size() == 0) {
 			retorno = "Não há nunhum histórico de vendas!";
 			return retorno;
 		}

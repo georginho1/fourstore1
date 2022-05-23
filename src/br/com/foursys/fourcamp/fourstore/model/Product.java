@@ -142,4 +142,13 @@ public class Product {
 		this.size = sku.substring(12, 14);
 	}
 
+	@Override
+	public String toString() {
+		return "Product [sku=" + sku + ", id=" + id + ", description=" + description + ", type=" + type + ", size="
+				+ size + ", color=" + color + ", category=" + category + ", season=" + season + ", quantity=" + quantity
+				+ ", purchasePrice=" + purchasePrice + ", salePrice=" + salePrice + "]";
+	}
+	
+	
+
 }
