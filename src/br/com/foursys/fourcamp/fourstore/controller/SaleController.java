@@ -1,5 +1,10 @@
 package br.com.foursys.fourcamp.fourstore.controller;
 
+import java.util.List;
+
+import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
+import br.com.foursys.fourcamp.fourstore.model.Client;
+import br.com.foursys.fourcamp.fourstore.model.Product;
 import br.com.foursys.fourcamp.fourstore.model.Sale;
 import br.com.foursys.fourcamp.fourstore.service.SaleService;
 
@@ -7,8 +12,9 @@ public class SaleController {
 	
 	SaleService saleService = new SaleService();
 	
-	public String saleRegister(Sale sale) {
+	public String saleRegister(Client client, List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
 		String retorno = "";
+		Sale sale = new Sale(client, products, amountValue, paymentMethod);
 		saleService.saveSale(sale);
 		retorno = "Venda registrada com sucesso!";
 		return retorno;
