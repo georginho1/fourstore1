@@ -64,7 +64,7 @@ public class MainMenu {
 				case 1:{
 				    // => Precisa dos dados da venda.
 					// saleRegister(); metodo para consultar venda
-					saleController.saleRegister(null, null, null, null);
+					System.out.println(saleController.saleRegister(null, null, null, null));
 					break;
 				}
 				case 2:{
