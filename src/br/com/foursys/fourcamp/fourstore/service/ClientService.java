@@ -1,7 +1,24 @@
 package br.com.foursys.fourcamp.fourstore.service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ClientService {
-	private Boolean cpfValidation(String cpf) {
+	public Boolean cpfValidation(String cpf) {
+		
+		
+		String pattern = "([0-9]{3}[\\.][0-9]{3}[\\.][0-9]{3}[\\-][0-9]{2})";
+		Pattern regex = Pattern.compile(pattern);
+		
+		Matcher matcher = regex.matcher(cpf);
+		
+		if(!matcher.matches()) {
+			System.out.println("Cpf escrito errado");  // Apagar essa linha
+			return false;
+		}
+		
+		// o código acima deve ir para o controller
+		
 		String S1, S2, S3, S4, S5, S6, S7, S8, S9, check = "";
 		int N1, N2, N3, N4, N5, N6, N7, N8, N9, verify1, verify2;
 
