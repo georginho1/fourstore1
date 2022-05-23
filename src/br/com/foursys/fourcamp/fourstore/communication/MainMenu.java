@@ -1,6 +1,10 @@
 package br.com.foursys.fourcamp.fourstore.communication;
 
+
 import java.util.Scanner;
+
+import br.com.foursys.fourcamp.fourstore.controller.MenuController;
+
 
 public class MainMenu {
 
@@ -24,11 +28,9 @@ public class MainMenu {
 			entrada = scanner.nextLine();
 			System.out.println("----------------------------------\n");
 
-			if(entrada.matches("[0-4]")) {
-				option = Integer.parseInt(entrada);
-			}else {
-			option = -1;
-			}
+			MenuController menuController = new MenuController();
+			option = menuController.validationRegexMenu(entrada);
+			
 			switch(option) {
 				case 0:
 					System.out.println("\nSistema encerrado");
@@ -58,11 +60,9 @@ public class MainMenu {
 					+ "\n0 - Para voltar");
 			Scanner sc = new Scanner(System.in);
 			entrada = sc.nextLine();
-			if(entrada.matches("[0-2]")) {
-				option = Integer.parseInt(entrada);
-			}else {
-			option = -1;
-			}
+			
+			MenuController menuController = new MenuController();
+			option = menuController.validationRegexMenu(entrada);
 			switch(option) {
 			case 0:{
 				primaryMenu();
@@ -99,11 +99,9 @@ public class MainMenu {
 		Scanner sc = new Scanner(System.in);
 		entrada = sc.nextLine();
 		
-		if(entrada.matches("[0-6]")) {
-			option = Integer.parseInt(entrada);
-		}else {
-		option = -1;
-		}
+		MenuController menuController = new MenuController();
+		option = menuController.validationRegexMenu(entrada);
+		
 		switch(option) {
 		case 0:{
 			primaryMenu();
