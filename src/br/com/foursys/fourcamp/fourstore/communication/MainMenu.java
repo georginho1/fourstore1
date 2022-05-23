@@ -11,7 +11,8 @@ public class MainMenu {
 	}
 	private void primaryMenu() {
 		Scanner scanner = new Scanner(System.in);
-		int option = -1;
+		Integer option = -1;
+		String entrada;
 		
 		while(option != 0) {
 			System.out.println("==========FOURSTORE=============||");
@@ -20,10 +21,14 @@ public class MainMenu {
 			System.out.println("3 - Vendas                      ||");
 			System.out.println("0 - Sair do sistema             ||");
 			System.out.print("Insira uma opção: ");
-			option = scanner.nextInt();
+			entrada = scanner.nextLine();
 			System.out.println("----------------------------------\n");
 
-
+			if(entrada.matches("[0-4]")) {
+				option = Integer.parseInt(entrada);
+			}else {
+			option = -1;
+			}
 			switch(option) {
 				case 0:
 					System.out.println("\nSistema encerrado");
@@ -38,20 +43,26 @@ public class MainMenu {
 					this.menuSales();
 					break;
 				default:
-					System.out.println("\nOpção inválida. Tente novamente.\n");
+					System.out.println("\nOpcao Invalida. Tente Novamente. \n");
 			}
 		}
-	}
+}
 
 	private void menuSales() {
 		int option = -1;
+		String entrada;
 		
 		while(option != 0) {
 			System.out.println("1 - Realizar Venda"
 					+ "\n2 - Consultar uma venda"
 					+ "\n0 - Para voltar");
 			Scanner sc = new Scanner(System.in);
-			option = sc.nextInt();
+			entrada = sc.nextLine();
+			if(entrada.matches("[0-2]")) {
+				option = Integer.parseInt(entrada);
+			}else {
+			option = -1;
+			}
 			switch(option) {
 			case 0:{
 				primaryMenu();
@@ -74,6 +85,7 @@ public class MainMenu {
 
 	private void menuProducts() {
 		int option = -1;
+		String entrada;
 		
 		while(option != 0) {
 		System.out.println("1 - Cadastrar Produto"
@@ -85,8 +97,13 @@ public class MainMenu {
 				+ "\n0 - Para voltar");
 		
 		Scanner sc = new Scanner(System.in);
-		option = sc.nextInt();
+		entrada = sc.nextLine();
 		
+		if(entrada.matches("[0-6]")) {
+			option = Integer.parseInt(entrada);
+		}else {
+		option = -1;
+		}
 		switch(option) {
 		case 0:{
 			primaryMenu();
@@ -119,7 +136,6 @@ public class MainMenu {
 		default:
 			System.out.println("\nOpção Invalida. Tente Novamente \n");
 		}
-		
 	}
 	}
 
