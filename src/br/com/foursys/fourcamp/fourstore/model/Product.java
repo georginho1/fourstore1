@@ -131,8 +131,6 @@ public class Product {
 	}
 	
 
-	
-	
 	private void parseSku(String sku) {
 		this.id = sku.substring(0, 2);
 		this.category = sku.substring(2, 4);
@@ -142,4 +140,12 @@ public class Product {
 		this.size = sku.substring(12, 14);
 	}
 
+	@Override
+	public String toString() {
+		return "Produto: \nsku: " + sku + "\nid: " + id + "\nDescricao: " + description 
+				+ "\nTipo: " + type + "\nTamanho: " + size + "\nCor: " + color 
+				+ "\nCategoria: " + category + "\nEstação: " + season + "\nQuantidade: " + quantity
+				+ "\nPreço de compra: " + purchasePrice + "\nPreço de venda: " + salePrice;
+	}
+	
 }
