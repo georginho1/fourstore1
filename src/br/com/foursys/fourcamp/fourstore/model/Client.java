@@ -37,6 +37,6 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Client:\nnome: " + name + "\nCPF: " + cpf + "\nChave pix: " + pixKey;
+		return "Cliente:\nnome: " + name + "\nCPF: " + cpf + "\nChave pix: " + pixKey;
 	}	
 }
