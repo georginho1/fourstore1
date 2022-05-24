@@ -23,7 +23,6 @@ public class ClientData {
 	}
 
 	public void updateClient(Client client) {
-
 		for (int x = 0; x < this.clientList.size(); x++) {
 			if (client.getCpf() == this.clientList.get(x).getCpf()) {
 				this.clientList.set(x, client);
