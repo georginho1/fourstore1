@@ -34,8 +34,9 @@ public class Client {
 	public void setPixKey(String pixKey) {
 		this.pixKey = pixKey;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Cliente:\nnome: " + name + "\nCPF: " + cpf + "\nChave pix: " + pixKey;
+	}	
 }
