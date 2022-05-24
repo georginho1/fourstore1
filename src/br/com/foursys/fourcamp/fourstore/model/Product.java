@@ -129,7 +129,10 @@ public class Product {
 	public void setSalePrice(Double salePrice) {
 		this.salePrice = salePrice;
 	}
-	
+	public void update(Product product) {
+		this.quantity+=product.getQuantity();
+		this.salePrice=product.getSalePrice();
+	}
 
 	
 	
@@ -141,14 +144,13 @@ public class Product {
 		this.type = sku.substring(10, 12);
 		this.size = sku.substring(12, 14);
 	}
-
+	//excluir
 	@Override
 	public String toString() {
 		return "Product [sku=" + sku + ", id=" + id + ", description=" + description + ", type=" + type + ", size="
 				+ size + ", color=" + color + ", category=" + category + ", season=" + season + ", quantity=" + quantity
-				+ ", purchasePrice=" + purchasePrice + ", salePrice=" + salePrice + "]";
+				+ ", purchasePrice=" + purchasePrice + ", salePrice=" + salePrice + "]\n\n";
 	}
-	
-	
 
+	
 }
