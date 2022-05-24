@@ -29,7 +29,7 @@ public class MainMenu {
 			System.out.println("----------------------------------\n");
 
 			MenuController menuController = new MenuController();
-			option = menuController.validationRegexMenu(entrada);
+			option = menuController.validationRegexMenu(entrada, "[0-6]");
 			
 			switch(option) {
 				case 0:
@@ -62,7 +62,7 @@ public class MainMenu {
 			entrada = sc.nextLine();
 			
 			MenuController menuController = new MenuController();
-			option = menuController.validationRegexMenu(entrada);
+			option = menuController.validationRegexMenu(entrada, "[0-6]");
 			switch(option) {
 			case 0:{
 				primaryMenu();
@@ -100,7 +100,7 @@ public class MainMenu {
 		entrada = sc.nextLine();
 		
 		MenuController menuController = new MenuController();
-		option = menuController.validationRegexMenu(entrada);
+		option = menuController.validationRegexMenu(entrada,"[0-6]");
 		
 		switch(option) {
 		case 0:{
