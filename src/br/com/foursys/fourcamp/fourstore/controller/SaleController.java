@@ -15,14 +15,15 @@ public class SaleController {
 	public String saleRegister(Client client, List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
 		String retorno = "";
 		
-		
-		Sale sale = new Sale(client, products, amountValue, paymentMethod);
-		
-		//verificarEstoque(List<products>) em service
-		
-		saleService.saveSale(sale);
-		retorno = "Venda registrada com sucesso!";
-		return retorno;
+		if(client != null && products != null && amountValue != null && paymentMethod != null) {
+			Sale sale = new Sale(client, products, amountValue, paymentMethod);
+			//verificarEstoque(List<products>) em service
+			saleService.saveSale(sale);
+			retorno = sale.toString();
+			return retorno;
+		} else {
+			return "Não foi possível registrar a venda";
+		}
 	}
 	
 	public String saleConsultation() {
@@ -32,6 +33,12 @@ public class SaleController {
 			return retorno;
 		}
 		retorno = saleService.listSale().toString();
+		return retorno;
+	}
+	
+	public Double amountValeu(List<Product> products) {
+		Double retorno = 0.0;
+		retorno = saleService.amountValeu(products);
 		return retorno;
 	}
 

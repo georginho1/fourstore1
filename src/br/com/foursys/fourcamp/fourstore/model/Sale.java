@@ -55,7 +55,7 @@ public class Sale {
 		return "\nVenda para o cliente: "+ client
 		     + "\nProdutos: " + products
 		     + "\nValor total: " + amountValue
-		     + "\nMétodo de pagamento: " + paymentMethod;
+		     + "\nMétodo de pagamento: " + paymentMethod.getDescription();
 	}
 	
 } 
