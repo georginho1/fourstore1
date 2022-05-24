@@ -129,7 +129,10 @@ public class Product {
 	public void setSalePrice(Double salePrice) {
 		this.salePrice = salePrice;
 	}
-	
+	public void update(Product product) {
+		this.quantity+=product.getQuantity();
+		this.salePrice=product.getSalePrice();
+	}
 
 	
 	

@@ -15,7 +15,7 @@ public class ProductData {
 		for(int i = 0; i < productList.size(); i++) {
 			Product listProduct = productList.get(i);
 			if(listProduct.getId().equals(product.getId())) {
-				productList.set(i, product);
+				listProduct.update(product);
 			}
 		}
 	}
