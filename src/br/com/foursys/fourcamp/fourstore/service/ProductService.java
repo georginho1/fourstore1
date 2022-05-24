@@ -10,9 +10,9 @@ public class ProductService {
 	public Boolean haveStock(Product purchaseProduct, Integer purchaseQuantity) {
 		String purchaseProductId = purchaseProduct.getId();
 		Product productInStock = data.getProductById(purchaseProductId);
-		Integer quantityInStock = productInStock.getQuantity();
 		
 		if(productInStock != null) {
+			Integer quantityInStock = productInStock.getQuantity();
 			if(quantityInStock >= purchaseQuantity) {
 				return true;
 			}
