@@ -14,12 +14,6 @@ public class Product {
 	private Double purchasePrice;
 	private Double salePrice;
 
-	
-
-	public Product(String sku, Integer quantity) {	
-		this.sku = sku;
-		this.quantity = quantity;
-	}	
 
 	public Product(String sku, Integer quantity, Double purchasePrice, Double salePrice) {
 		this.sku = sku;
@@ -129,7 +123,10 @@ public class Product {
 	public void setSalePrice(Double salePrice) {
 		this.salePrice = salePrice;
 	}
-	
+	public void update(Product product) {
+		this.quantity+=product.getQuantity();
+		this.salePrice=product.getSalePrice();
+	}
 
 	private void parseSku(String sku) {
 		this.id = sku.substring(0, 2);
@@ -142,10 +139,9 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Produto: \nsku: " + sku + "\nid: " + id + "\nDescricao: " + description 
+		return "Produto: \nsku: " + sku + "\nid: " + id + "\nDescricao: " + ((this.description == null) ? "" : this.description)
 				+ "\nTipo: " + type + "\nTamanho: " + size + "\nCor: " + color 
 				+ "\nCategoria: " + category + "\nEstação: " + season + "\nQuantidade: " + quantity
 				+ "\nPreço de compra: " + purchasePrice + "\nPreço de venda: " + salePrice;
 	}
-	
 }
