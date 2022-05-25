@@ -3,15 +3,18 @@ package br.com.foursys.fourcamp.fourstore.data;
 import java.util.ArrayList;
 
 import br.com.foursys.fourcamp.fourstore.model.Product;
+import interfaces.DataInterfaces;
 
-public class ProductData {
+public class ProductData implements DataInterfaces<Product> {
 	ArrayList<Product> productList = new ArrayList<Product>();
 	
-	public void saveProduct(Product product) {
+	@Override
+	public void save(Product product) {
 		this.productList.add(product);
 	}
 	
-	public void updateProduct(Product product) {
+	@Override
+	public void update(Product product) {
 		for(int i = 0; i < productList.size(); i++) {
 			Product listProduct = productList.get(i);
 			if(listProduct.getId().equals(product.getId())) {
@@ -40,14 +43,16 @@ public class ProductData {
 		return null;
 	}
 	
-	public ArrayList<Product> getAllProducts () {
+	@Override
+	public ArrayList<Product> listAll() {
 		if(productList != null) {
 			return productList;
 		}
 		return null;
 	}
 	
-	public void deleteProduct(Product product) {
+	@Override
+	public void delete(Product product) {
 		for(int i = 0; i < productList.size(); i++) {
 			Product listProduct = productList.get(i);
 			if(listProduct.getId().equals(product.getId())) {

@@ -33,6 +33,7 @@ public class MainMenu {
 			switch (option) {
 			case 0:
 				System.out.println("\nSistema encerrado");
+				option = 0;
 				break;
 			case 1:
 				this.menuProducts();
