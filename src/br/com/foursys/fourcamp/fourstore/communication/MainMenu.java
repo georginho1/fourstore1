@@ -5,7 +5,8 @@ import java.util.Scanner;
 import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 
 public class MainMenu {
-	ProductController productC;
+	
+	ProductController productC = new ProductController();
 	
 	public void mainMenu() {
 		Scanner sc = new Scanner(System.in);
@@ -31,28 +32,22 @@ public class MainMenu {
 		 //no pacote model, na classe product, os construtores não possuem o
 		//parametro id, deve-se crialo?
 		Scanner sc = new Scanner(System.in);
+		String sku;
 		
-		System.out.println("Insira o sku do produto");
-		String sku = sc.next();
+		while (true) {
+			System.out.println("Insira o sku do produto");
+			sku = sc.next();
+			if(!productC.productIsRegistered(sku)) {
+				System.out.println("if do menu");
+				break;
+			}else {
+				System.out.println("SKU já cadastrado");
+			}
+		}
 		
 		System.out.println("Insira a descrição do produto");
-		sc.next();
+		sc.nextLine();
 		String description = sc.nextLine();
-		
-		System.out.println("Insira o tipo do produto");
-		String type = sc.next();
-		
-		System.out.println("Insira o tamanho do produto");
-		String size = sc.next();
-		
-		System.out.println("Insira a cor do produto");
-		String color = sc.next();
-		
-		System.out.println("Insira a categoria do produto");
-		String category = sc.next();
-		
-		System.out.println("Insira a estação do produto");
-		String season = sc.next();
 		
 		System.out.println("Insira a quantidade do produto");
 		Integer quantity = sc.nextInt();
@@ -63,8 +58,7 @@ public class MainMenu {
 		System.out.println("Insira o valor de venda do produto");
 		Double salePrice = sc.nextDouble();
 		
-		productC = new ProductController();
-		String retorno = productC.cadProduct(sku, description, type, size, color, category, season, quantity, purchasePrice, salePrice);
+		String retorno = productC.cadProduct(sku, description, quantity, purchasePrice, salePrice);
 		System.out.println(retorno);
 
 	}

@@ -34,8 +34,10 @@ public class ProductData {
 		for(int i = 0; i < productList.size(); i++) {
 			String productSku = productList.get(i).getSku();
 			if(productSku.equals(sku)) {
+				System.out.println("if do data");
 				return productList.get(i);
 			}
+			System.out.println("else do service");
 		}
 		return null;
 	}

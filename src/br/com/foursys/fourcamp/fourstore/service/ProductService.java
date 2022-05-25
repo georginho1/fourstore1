@@ -9,9 +9,17 @@ public class ProductService {
 
 	public void cadProduct(Product product) {
 		data.saveProduct(product);
-		
 	}
 	
 	
+	public boolean productIsRegistered(String sku) {
+		Boolean retorno = data.getProductById(sku);
+		if(data.getProductBySku(sku) == null) {
+			System.out.println("if do service");
+			return false;
+		}
+		System.out.println("else do service");
+		return true;
+	}
 
 }
