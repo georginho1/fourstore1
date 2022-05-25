@@ -14,7 +14,6 @@ public class SaleController {
 	
 	public String saleRegister(Client client, List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
 		String retorno = "";
-		
 		if(client != null && products != null && amountValue != null && paymentMethod != null) {
 			Sale sale = new Sale(client, products, amountValue, paymentMethod);
 			//verificarEstoque(List<products>) em service
