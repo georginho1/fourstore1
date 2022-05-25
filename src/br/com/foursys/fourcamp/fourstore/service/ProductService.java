@@ -7,8 +7,14 @@ import br.com.foursys.fourcamp.fourstore.model.Product;
 
 public class ProductService {
 	
-	public ArrayList<Product> listProductService() {
+	public String listProductService() {
+		String retorno = "";
+		ArrayList<Product> lista = new ArrayList<Product>();
 		ProductData productData = new ProductData();
-		return productData.getAllProducts();
+		lista = productData.getAllProducts();
+		for (Product list : lista) {
+			retorno += list.toString();
+		}
+		return retorno;
 	}
 }

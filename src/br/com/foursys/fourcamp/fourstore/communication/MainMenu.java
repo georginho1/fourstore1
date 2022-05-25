@@ -115,7 +115,8 @@ public class MainMenu {
 				break;
 			}
 			case 4: {
-				productController.listProducts();// metodo para listar produtos
+				String retorno = productController.listProducts();// metodo para listar produtos
+				System.out.println(retorno);
 				break;
 			}
 			case 5: {
