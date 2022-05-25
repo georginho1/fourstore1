@@ -38,10 +38,10 @@ public class MainMenu {
 			System.out.println("Insira o sku do produto");
 			sku = sc.next();
 			if(!productC.productIsRegistered(sku)) {
-				System.out.println("if do menu");
 				break;
 			}else {
-				System.out.println("SKU já cadastrado");
+				System.out.println("SKU já cadastrado. \n");
+				mainMenu();
 			}
 		}
 		
