@@ -8,6 +8,8 @@ import br.com.foursys.fourcamp.fourstore.model.Sale;
 
 public class SaleService {
 	
+	static List<Product> cart;
+	
 	public void saveSale(Sale sale) {
 		SaleData saleData = new SaleData();
 		saleData.save(sale);
@@ -24,6 +26,14 @@ public class SaleService {
 			amountValue += products.get(i).getSalePrice();
 		}
 		return amountValue;
+	}
+	
+	public void addCart(Product product) {
+		cart.add(product);
+	}
+	
+	public void clearCart() {
+		cart.clear();
 	}
 
 }

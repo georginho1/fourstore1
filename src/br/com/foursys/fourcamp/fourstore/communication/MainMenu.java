@@ -71,6 +71,7 @@ public class MainMenu {
 				break;
 			}
 			case 2: {
+				System.out.println("Digite o produto");
 				// saleRegister(); metodo para realizar venda
 				break;
 			}

@@ -12,6 +12,19 @@ public class SaleController {
 	
 	SaleService saleService = new SaleService();
 	
+	public String addCart(Product product) {
+		if(product == null) {
+			return "O produto não pode ser adicionado";
+		}
+		saleService.addCart(product);
+		return "Produto adicionado com sucesso!";
+	}
+	
+	public String clearCart() {
+		saleService.clearCart();
+		return "Carrinho limpo";
+	}
+	
 	public String saleRegister(List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
 		String retorno = "";
 		if(products != null && amountValue != null && paymentMethod != null) { // trocar
