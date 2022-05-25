@@ -11,6 +11,12 @@ public class Sale {
 	private Double amountValue;
 	private PaymentMethod paymentMethod;
 	
+	public Sale(List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
+		this.products = products;
+		this.amountValue = amountValue;
+		this.paymentMethod = paymentMethod;
+	}
+	
 	public Sale(Client client, List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
 		this.client = client;
 		this.products = products;
