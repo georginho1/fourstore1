@@ -39,8 +39,22 @@ public class Product {
 		this.salePrice = salePrice;
 		parseSku(sku);
 	}
-
 	
+	//criei um construtor que passa todos os atributos
+	public Product(String sku, String description, String type, String size, String color, String category, String season, Integer quantity, Double purchasePrice, Double salePrice) {
+		this.sku = sku;
+		//this.id = id;
+		this.description = description;
+		this.type = type;
+		this.size = size;
+		this.color = color;
+		this.category = category;
+		this.season = season;
+		this.quantity = quantity;
+		this.purchasePrice = purchasePrice;
+		this.salePrice = salePrice;
+		parseSku(sku);
+	}	
 	
 	public String getId() {
 		return id;
