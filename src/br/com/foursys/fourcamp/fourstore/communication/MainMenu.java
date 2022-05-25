@@ -3,6 +3,7 @@ package br.com.foursys.fourcamp.fourstore.communication;
 import java.util.Scanner;
 
 import br.com.foursys.fourcamp.fourstore.controller.MenuController;
+import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 
 public class MainMenu {
 
@@ -83,6 +84,7 @@ public class MainMenu {
 	private void menuProducts() {
 		int option = -1;
 		String entrada;
+		ProductController productController = new ProductController();
 
 		while (option != 0) {
 			System.out.println("1 - Cadastrar Produto" + "\n2 - Buscar Produto (ID)" + "\n3 - Buscar Produto (SKU)"
@@ -113,7 +115,7 @@ public class MainMenu {
 				break;
 			}
 			case 4: {
-				// listarProdutos(); metodo para listar produtos
+				productController.listProducts();// metodo para listar produtos
 				break;
 			}
 			case 5: {
@@ -125,7 +127,7 @@ public class MainMenu {
 				break;
 			}
 			default:
-				System.out.println("\nOpÃ§Ã£o Invalida. Tente Novamente \n");
+				System.out.println("\nOpção Invalida. Tente Novamente \n");
 			}
 		}
 

@@ -40,7 +40,7 @@ public class ProductData {
 		return null;
 	}
 	
-	public ArrayList<Product> getAllProducts () {
+	public ArrayList<Product> getAllProducts() {
 		if(productList != null) {
 			return productList;
 		}
