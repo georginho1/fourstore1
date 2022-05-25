@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import br.com.foursys.fourcamp.fourstore.controller.MenuController;
 import br.com.foursys.fourcamp.fourstore.controller.ProductController;
+import br.com.foursys.fourcamp.fourstore.controller.SaleController;
 
 public class MainMenu {
 
@@ -51,6 +52,7 @@ public class MainMenu {
 	}
 
 	private void menuSales() {
+		SaleController saleController = new SaleController();
 		int option = -1;
 		String entrada;
 
@@ -68,6 +70,7 @@ public class MainMenu {
 			}
 			case 1: {
 				// saleConsultation(); metodo para consultar venda
+				System.out.println(saleController.saleConsultation());
 				break;
 			}
 			case 2: {
