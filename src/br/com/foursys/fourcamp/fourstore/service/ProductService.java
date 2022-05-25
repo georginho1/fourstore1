@@ -7,13 +7,13 @@ public class ProductService {
 	
 	ProductData data = new ProductData();
 	
-	public Boolean haveStock(Product purchaseProduct, Integer purchaseQuantity) {
-		String purchaseProductId = purchaseProduct.getId();
-		Product productInStock = data.getProductById(purchaseProductId);
+	public Boolean haveStock(String sku, Integer quantity) {
+		
+		Product productInStock = data.getProductBySku(sku);
 		
 		if(productInStock != null) {
 			Integer quantityInStock = productInStock.getQuantity();
-			if(quantityInStock >= purchaseQuantity) {
+			if(quantityInStock >= quantity) {
 				return true;
 			}
 		}
