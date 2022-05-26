@@ -1,9 +1,14 @@
 package br.com.foursys.fourcamp.fourstore.communication;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import br.com.foursys.fourcamp.fourstore.controller.MenuController;
 import br.com.foursys.fourcamp.fourstore.controller.ProductController;
+import br.com.foursys.fourcamp.fourstore.controller.SaleController;
+import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
+import br.com.foursys.fourcamp.fourstore.model.Client;
+import br.com.foursys.fourcamp.fourstore.model.Product;
 
 public class MainMenu {
 
@@ -51,6 +56,7 @@ public class MainMenu {
 	}
 
 	private void menuSales() {
+		SaleController saleController = new SaleController();
 		int option = -1;
 		String entrada;
 
@@ -66,12 +72,19 @@ public class MainMenu {
 				primaryMenu();
 				break;
 			}
-			case 1: {
-				// saleConsultation(); metodo para consultar venda
+			case 1: {	
+				//Se o cliente deseja informar os seus dados, chamar:
+				//String resultado = saleController.saleRegister(Cliente, listaTeste, saleController.amountValeu(listaTeste), metodoPagamentoTeste);
+				//se não, chamar
+				//String resultado = saleController.saleRegister(listaTeste, saleController.amountValeu(listaTeste), metodoPagamentoTeste);
+
+				//System.out.println(resultado);
+				
 				break;
 			}
 			case 2: {
-				// saleRegister(); metodo para realizar venda
+				
+				System.out.println(saleController.saleConsultation());
 				break;
 			}
 			default:

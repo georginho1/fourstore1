@@ -31,7 +31,7 @@ public class SaleController {
 			Sale sale = new Sale(products, amountValue, paymentMethod);
 			//verificarEstoque(List<products>) em service
 			saleService.saveSale(sale);
-			retorno = sale.toString();
+			retorno = "\nVenda realizada com sucesso!\n\n" + sale.toString();
 			return retorno;
 		} else {
 			return "Não foi possível registrar a venda";
@@ -44,7 +44,7 @@ public class SaleController {
 			Sale sale = new Sale(client, products, amountValue, paymentMethod);
 			//verificarEstoque(List<products>) em service
 			saleService.saveSale(sale);
-			retorno = sale.toString();
+			retorno = "\nVenda realizada com sucesso!\n\n" + sale.toString();
 			return retorno;
 		} else {
 			return "Não foi possível registrar a venda";

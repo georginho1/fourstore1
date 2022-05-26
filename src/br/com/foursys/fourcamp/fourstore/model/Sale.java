@@ -58,10 +58,18 @@ public class Sale {
 
 	@Override
 	public String toString() {
-		return "\nVenda para o cliente: "+ client
-		     + "\nProdutos: " + products
+		if(this.client != null) {
+			return "\nVenda para o cliente: " +  client.toString() 
+		     + "\nProdutos: " + products.toString()
 		     + "\nValor total: " + amountValue
-		     + "\nMétodo de pagamento: " + paymentMethod.getDescription();
+		     + "\nMétodo de pagamento: " + paymentMethod.getDescription() + "\n";
+		} else {
+			return "\nVenda para o cliente: cliente não informado"
+			 + "\nProdutos: " + products.toString()
+		     + "\nValor total: " + amountValue
+		     + "\nMétodo de pagamento: " + paymentMethod.getDescription() + "\n";
+		}
+		
 	}
 	
 } 

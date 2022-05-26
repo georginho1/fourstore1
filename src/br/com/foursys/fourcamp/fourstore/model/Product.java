@@ -139,9 +139,9 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Produto: \nsku: " + sku + "\nid: " + id + "\nDescricao: " + ((this.description == null) ? "" : this.description)
+		return "\n\nsku: " + sku + "\nid: " + id + "\nDescricao: " + ((this.description == null) ? "" : this.description)
 				+ "\nTipo: " + type + "\nTamanho: " + size + "\nCor: " + color 
 				+ "\nCategoria: " + category + "\nEstação: " + season + "\nQuantidade: " + quantity
-				+ "\nPreço de compra: " + purchasePrice + "\nPreço de venda: " + salePrice;
+				+ "\nPreço de compra: " + purchasePrice + "\nPreço de venda: " + salePrice + "\n\n";
 	}
 }
