@@ -34,4 +34,9 @@ public class ProductService {
 		return false;
 		
 	}
+	
+	public Product getProductBySku (String sku) {
+		return data.getProductBySku(sku);
+	}
+	
 }

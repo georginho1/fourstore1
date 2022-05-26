@@ -12,17 +12,20 @@ public class SaleController {
 	
 	SaleService saleService = new SaleService();
 	
-	public String addCart(Product product) {
-		if(product == null) {
-			return "O produto não pode ser adicionado";
+	public String addCart(String sku, Integer quantity) {
+		if(saleService.addCart(sku, quantity)) {
+			return "Produto adicionado com sucesso!";
 		}
-		saleService.addCart(product);
-		return "Produto adicionado com sucesso!";
+		return "O produto não pode ser adicionado";
 	}
 	
 	public String clearCart() {
 		saleService.clearCart();
 		return "Carrinho limpo";
+	}
+	
+	public List<Product> cart() {
+		return saleService.cart();
 	}
 	
 	public String saleRegister(List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
