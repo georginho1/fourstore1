@@ -12,7 +12,7 @@ public class Application {
 		Product produtos = new Product("10321130300050", 10, 25.00, 50.00);
 		
 		ProductData bancoProduto = new ProductData();
-		bancoProduto.saveProduct(produtos);
+		bancoProduto.save(produtos);
 		
 		menu.mainMenu();
 		

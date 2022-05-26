@@ -1,15 +1,21 @@
 package br.com.foursys.fourcamp.fourstore.model;
 
+import br.com.foursys.fourcamp.fourstore.enums.CategoryEnum;
+import br.com.foursys.fourcamp.fourstore.enums.ColorEnum;
+import br.com.foursys.fourcamp.fourstore.enums.SeasonEnum;
+import br.com.foursys.fourcamp.fourstore.enums.SizeEnum;
+import br.com.foursys.fourcamp.fourstore.enums.TypeEnum;
+
 public class Product {
 	
 	private String sku;
 	private String id;
 	private String description;
-	private String type;
-	private String size;
-	private String color;
-	private String category;
-	private String season;
+	private TypeEnum type;
+	private SizeEnum size;
+	private ColorEnum color;
+	private CategoryEnum category;
+	private SeasonEnum season;
 	private Integer quantity;
 	private Double purchasePrice;
 	private Double salePrice;
@@ -33,8 +39,22 @@ public class Product {
 		this.salePrice = salePrice;
 		parseSku(sku);
 	}
-
 	
+	//criei um construtor que passa todos os atributos
+	public Product(String sku, String description, TypeEnum type, SizeEnum size, ColorEnum color, CategoryEnum category, SeasonEnum season, Integer quantity, Double purchasePrice, Double salePrice) {
+		this.sku = sku;
+		//this.id = id;
+		this.description = description;
+		this.type = type;
+		this.size = size;
+		this.color = color;
+		this.category = category;
+		this.season = season;
+		this.quantity = quantity;
+		this.purchasePrice = purchasePrice;
+		this.salePrice = salePrice;
+		parseSku(sku);
+	}	
 	
 	public String getId() {
 		return id;
@@ -60,43 +80,43 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getType() {
+	public TypeEnum getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(TypeEnum type) {
 		this.type = type;
 	}
 
-	public String getSize() {
+	public SizeEnum getSize() {
 		return size;
 	}
 
-	public void setSize(String size) {
+	public void setSize(SizeEnum size) {
 		this.size = size;
 	}
 
-	public String getColor() {
+	public ColorEnum getColor() {
 		return color;
 	}
 
-	public void setColor(String color) {
+	public void setColor(ColorEnum color) {
 		this.color = color;
 	}
 
-	public String getCategory() {
+	public CategoryEnum getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(CategoryEnum category) {
 		this.category = category;
 	}
 
-	public String getSeason() {
+	public SeasonEnum getSeason() {
 		return season;
 	}
 
-	public void setSeason(String season) {
+	public void setSeason(SeasonEnum season) {
 		this.season = season;
 	}
 
@@ -123,6 +143,7 @@ public class Product {
 	public void setSalePrice(Double salePrice) {
 		this.salePrice = salePrice;
 	}
+	
 	public void update(Product product) {
 		this.quantity+=product.getQuantity();
 		this.salePrice=product.getSalePrice();
@@ -130,11 +151,11 @@ public class Product {
 
 	private void parseSku(String sku) {
 		this.id = sku.substring(0, 2);
-		this.category = sku.substring(2, 4);
-		this.color = sku.substring(4, 6);
-		this.season = sku.substring(6, 10);
-		this.type = sku.substring(10, 12);
-		this.size = sku.substring(12, 14);
+		this.category = CategoryEnum.get(sku.substring(2, 4));
+		this.color = ColorEnum.get(sku.substring(4, 6));
+		this.season = SeasonEnum.get(sku.substring(6, 10));
+		this.type = TypeEnum.get(sku.substring(10, 12));
+		this.size = SizeEnum.get(sku.substring(12, 14));
 	}
 
 	@Override

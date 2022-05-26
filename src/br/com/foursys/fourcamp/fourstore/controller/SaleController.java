@@ -1,5 +1,6 @@
 package br.com.foursys.fourcamp.fourstore.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,11 +8,13 @@ import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
 import br.com.foursys.fourcamp.fourstore.model.Client;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 import br.com.foursys.fourcamp.fourstore.model.Sale;
+import br.com.foursys.fourcamp.fourstore.service.ProductService;
 import br.com.foursys.fourcamp.fourstore.service.SaleService;
 
 public class SaleController {
 	
-	SaleService saleService = new SaleService();
+	private ProductService productService = new ProductService();
+	private SaleService saleService = new SaleService();
 	
 	public String addCart(String sku, Integer quantity) {
 		if(saleService.addCart(sku, quantity)) {
@@ -38,7 +41,7 @@ public class SaleController {
 			retorno = "\nVenda realizada com sucesso!\n\n" + sale.toString();
 			return retorno;
 		} else {
-			return "N�o foi poss�vel registrar a venda";
+			return "Não foi poss�vel registrar a venda";
 		}
 	}
 	
@@ -56,7 +59,18 @@ public class SaleController {
 	}
 	
 	public String saleRegister(Client client, Map<String, Integer> products, PaymentMethod paymentMethod) {
-		return null;
+		List<Product> productList = new ArrayList<>();
+		for(String sku : products.keySet()) {
+			Product product = productService.getBySku(sku);
+			product.setQuantity(products.get(sku));
+			productList.add(product);
+		}
+		
+		Double amountValue = saleService.amountValeu(productList);
+		
+		saleService.saveSale(new Sale(client, productList, amountValue, paymentMethod));
+		
+		return "Compra Registrada";
 	}
 	
 	public String saleConsultation() {

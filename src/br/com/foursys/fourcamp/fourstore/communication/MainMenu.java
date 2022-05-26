@@ -7,28 +7,30 @@ import java.util.Scanner;
 
 import br.com.foursys.fourcamp.fourstore.controller.ClientController;
 import br.com.foursys.fourcamp.fourstore.controller.MenuController;
+import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 import br.com.foursys.fourcamp.fourstore.controller.SaleController;
 import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
 import br.com.foursys.fourcamp.fourstore.model.Client;
 import br.com.foursys.fourcamp.fourstore.model.Product;
+
 
 public class MainMenu {
 	private Scanner scanner;
 	private MenuController menucontroller;
 	private SaleController salecontroller;
 	private ClientController clientcontroller;
+	private ProductController productcontroller;
 	
 	public MainMenu() {
 		this.menucontroller = new MenuController();
 		this.scanner = new Scanner(System.in);
 		this.salecontroller = new SaleController();
 		this.clientcontroller = new ClientController();
+		this.productcontroller = new ProductController();
 	}
 
 	public void mainMenu() {
-
 		primaryMenu();
-
 	}
 
 	private void primaryMenu() {
@@ -67,14 +69,14 @@ public class MainMenu {
 		}
 	}
 
+
 	private void menuSales() {
 		int option = -1;
 		String entrada;
 
 		while (option != 0) {
 			System.out.println("1 - Realizar Venda" + "\n2 - Consultar uma venda" + "\n0 - Para voltar");
-			Scanner sc = new Scanner(System.in);
-			entrada = sc.nextLine();
+			entrada = scanner.nextLine();
 
 			option = menucontroller.validationRegexMenu(entrada, "[0-6]");
 			switch (option) {
@@ -84,11 +86,11 @@ public class MainMenu {
 			}
 			case 1: {
 				menuDoSale();
-
 				break;
 			}
 			case 2: {
-				// saleRegister(); metodo para realizar venda
+				String result = salecontroller.saleConsultation();
+				System.out.println(result);
 				break;
 			}
 			default:
@@ -102,7 +104,6 @@ public class MainMenu {
 		String sku;
 		Product product;
 		Integer quantidade = 0;
-		Integer quantidadeestoque = 10;
 		Map<String, Integer> products = new HashMap<>();
 		Integer option;
 		
@@ -111,7 +112,7 @@ public class MainMenu {
 				System.out.println("digite o sku: ");
 				sku = scanner.nextLine();
 				scanner.nextLine();
-				if (metodoProvisorio(sku) == null) {
+				if (productcontroller.getProductBySku(sku) == null) {
 					System.out.println("produto não existe");
 				} else {
 					System.out.println("digite a quantidade:");
@@ -119,8 +120,8 @@ public class MainMenu {
 					if (quantidade < 1) {
 						System.out.println("digite 1 ou mais");
 						continue;
-					} else if (quantidade > quantidadeestoque) {
-						System.out.println("digite uma quantidade menor, em estoque só temos " + quantidadeestoque);
+					} else if (!productcontroller.haveStock(sku, quantidade)) {
+						System.out.println("Quantidade maior do que possuimos" );
 						continue;
 					}
 					break;
@@ -143,8 +144,9 @@ public class MainMenu {
 	
 		Integer resposta;
 		String cpf;
+		String nome;
 		Client client;
-		//Boolean clientIsValid = true;
+
 		while (true) {
 			System.out.println("deseja colocar o cpf? 1-sim ou 2-não ?");
 			resposta = scanner.nextInt();
@@ -157,7 +159,9 @@ public class MainMenu {
 							client = clientcontroller.findByCPF(cpf);
 						}
 						else{
-							//registerClient(cpf);
+							System.out.println("Digite o nome do cliente");
+							nome = scanner.next();
+							clientcontroller.registerClient( nome,  cpf);
 						}
 						break;
 					}
@@ -215,12 +219,6 @@ public class MainMenu {
 			break;
 
 		}
-		// salecontroller.saleRegister(null, List.of(), null, paymentmethod)
-
-	}
-
-	private String metodoProvisorio(String sku) {
-		return "isto � um produto";
 
 	}
 
@@ -229,15 +227,13 @@ public class MainMenu {
 		String entrada;
 
 		while (option != 0) {
-			System.out.println("1 - Cadastrar Produto" + "\n2 - Buscar Produto (ID)" + "\n3 - Buscar Produto (SKU)"
-					+ "\n4 - Lista Produtos" + "\n5 - Atualizar Produtos" + "\n6 - Excluir Produto"
-					+ "\n0 - Para voltar");
+			System.out.println("1 - Cadastrar Produto" + "\n2 - Buscar Produto por id" + "\n3 - Buscar Produto por sku"
+					+ "\n4 - Lista Produtos" + "\n5 - Atualizar Produto por id" + "\n6 - Atualizar produto por sku"
+					+ "\n7 - Excluir Produto pelo id" + "\n8 - Excluir Produto pelo sku" + "\n0 - Para voltar");
 
-			Scanner sc = new Scanner(System.in);
-			entrada = sc.nextLine();
+			entrada = scanner.next();
 
-			MenuController menuController = new MenuController();
-			option = menuController.validationRegexMenu(entrada, "[0-6]");
+			option = menucontroller.validationRegexMenu(entrada, "[0-8]");
 
 			switch (option) {
 			case 0: {
@@ -245,38 +241,118 @@ public class MainMenu {
 				break;
 			}
 			case 1: {
-				// cadastrarProduto(); metodo para cadastrar produto
+				this.cadProduct();
 				break;
 			}
 			case 2: {
-				// buscarProdutoId(); metodo para buscar produto pelo ID
+				this.getProductById();
 				break;
 			}
 			case 3: {
-				// buscarProdutoSku(); metodo para buscar pelo SKU
+				this.getProductBySku();
 				break;
 			}
 			case 4: {
-				// listarProdutos(); metodo para listar produtos
+				String retorno = productcontroller.listProducts();// metodo para listar produtos
+				System.out.println(retorno);
 				break;
 			}
 			case 5: {
-				// atualizarProdutos(); metodo para atualizar produtos
+				// updateProductById(); metodo para atualizar produtos, encontrando pelo id
 				break;
 			}
 			case 6: {
-				// excluirProdutos(); metodo para excluir produtos
+				// updateProductBySku(); metodo para atualizar produtos, encontrando pelo sku
+				break;
+			}
+			case 7: {
+				this.deleteProductById();
+				break;
+			}
+			case 8: {
+				this.deleteProductBySku();
 				break;
 			}
 			default:
-				System.out.println("\nOpção Invalida. Tente Novamente \n");
+				System.out.println("\nOp��o Invalida. Tente Novamente \n");
 			}
 		}
-
+		
+/*		System.out.println("Insira a descri��o do produto");
+		scanner.nextLine();
+		String description = scanner.nextLine();
+		
+		System.out.println("Insira a quantidade do produto");
+		Integer quantity = scanner.nextInt();
+		
+		System.out.println("Insira o valor de compra do produto");
+		Double purchasePrice = scanner.nextDouble();
+		
+		System.out.println("Insira o valor de venda do produto");
+		Double salePrice = scanner.nextDouble();
+		
+		String retorno = productcontroller.cadProduct(sku, description, quantity, purchasePrice, salePrice);
+		System.out.println(retorno);*/	}
+	
+	public void cadProduct() {
+		String sku;
+		
+		while (true) {
+			System.out.println("Insira o sku do produto");
+			sku = scanner.next();
+			if(!productcontroller.productIsRegistered(sku)) {
+				break;
+			}else {
+				System.out.println("SKU j� cadastrado. \n");
+				mainMenu();
+			}
+		}
+		
+		System.out.println("Insira a descri��o do produto");
+		scanner.nextLine();
+		String description = scanner.nextLine();
+		
+		System.out.println("Insira a quantidade do produto");
+		Integer quantity = scanner.nextInt();
+		
+		System.out.println("Insira o valor de compra do produto");
+		Double purchasePrice = scanner.nextDouble();
+		
+		System.out.println("Insira o valor de venda do produto");
+		Double salePrice = scanner.nextDouble();
+		
+		String retorno = productcontroller.cadProduct(sku, description, quantity, purchasePrice, salePrice);
+		System.out.println(retorno);
+	}
+	
+	
+	private void getProductById() {
+		System.out.print("\nInsira o id do produto: ");
+		String id = scanner.next();
+		System.out.println(productcontroller.getProductById(id) + "\n");
+	}
+	
+	private void getProductBySku() {
+		System.out.print("\nInsira o sku do produto: ");
+		String sku = scanner.next();
+		System.out.println(productcontroller.getProductBySku(sku) + "\n");
+	}
+	
+	private void deleteProductById() {
+		System.out.print("\nInsira o id do produto: ");
+		String id = scanner.next();
+		System.out.println(productcontroller.deleteProductById(id) + "\n");
+	}
+	
+	private void deleteProductBySku() {
+		System.out.print("\nInsira o sku do produto: ");
+		String id = scanner.next();
+		System.out.println(productcontroller.deleteProductBySku(id) + "\n");
+	}
 //	private void menuClients() {
 //		
 //		
 //	}
 //		
 	}
-}
+

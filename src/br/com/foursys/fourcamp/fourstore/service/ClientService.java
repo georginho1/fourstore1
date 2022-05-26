@@ -79,5 +79,9 @@ public class ClientService {
 	public Client findByCPF(String cpf) {
 		return clientData.findByCPF(cpf);
 	}
+	
+	public void registerClient(Client client) {
+		clientData.save(client);
+		}
 
 }
