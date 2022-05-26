@@ -11,6 +11,12 @@ public class Sale {
 	private Double amountValue;
 	private PaymentMethod paymentMethod;
 	
+	public Sale(List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
+		this.products = products;
+		this.amountValue = amountValue;
+		this.paymentMethod = paymentMethod;
+	}
+	
 	public Sale(Client client, List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
 		this.client = client;
 		this.products = products;
@@ -52,10 +58,18 @@ public class Sale {
 
 	@Override
 	public String toString() {
-		return "\nVenda para o cliente: "+ client
-		     + "\nProdutos: " + products
+		if(this.client != null) {
+			return "\nVenda para o cliente: " +  client.toString() 
+		     + "\nProdutos: " + products.toString()
 		     + "\nValor total: " + amountValue
-		     + "\nMétodo de pagamento: " + paymentMethod.getDescription();
+		     + "\nMétodo de pagamento: " + paymentMethod.getDescription() + "\n";
+		} else {
+			return "\nVenda para o cliente: cliente não informado"
+			 + "\nProdutos: " + products.toString()
+		     + "\nValor total: " + amountValue
+		     + "\nMétodo de pagamento: " + paymentMethod.getDescription() + "\n";
+		}
+		
 	}
 	
 } 

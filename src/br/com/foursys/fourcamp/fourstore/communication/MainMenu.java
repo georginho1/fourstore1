@@ -36,7 +36,7 @@ public class MainMenu {
 			System.out.println("2 - Vendas                      ||");
 //			System.out.println("3 - Clientes                    ||");
 			System.out.println("0 - Sair do sistema             ||");
-			System.out.print("Insira uma opção: ");
+			System.out.print("Insira uma opï¿½ï¿½o: ");
 			entrada = scanner.nextLine();
 			System.out.println("----------------------------------\n");
 
@@ -88,7 +88,7 @@ public class MainMenu {
 				break;
 			}
 			default:
-				System.out.println("\nOpção invalida. Tente Novamente. \n");
+				System.out.println("\nOpï¿½ï¿½o invalida. Tente Novamente. \n");
 			}
 		}
 
@@ -102,7 +102,7 @@ public class MainMenu {
 			System.out.println("digite o sku: ");
 			sku = scanner.nextLine();
 			if (metodoProvisorio(sku) == null) {
-				System.out.println("produto não existe");
+				System.out.println("produto nï¿½o existe");
 			} else {
 				//adicionar produto
 			}
@@ -119,7 +119,7 @@ public class MainMenu {
 				continue;
 
 			} else if (quantidade > quantidadeestoque) {
-				System.out.println("digite uma quantidade menor, em estoque só tem " + quantidadeestoque);
+				System.out.println("digite uma quantidade menor, em estoque sï¿½ tem " + quantidadeestoque);
 				continue;
 			}
 			break;
@@ -127,41 +127,44 @@ public class MainMenu {
 		}
 		String resposta;
 		String cpf;
+		Boolean clientIsValid = true;
 		while (true) {
-			System.out.println("deseja colocar o cpf? sim ou não ?");
+			System.out.println("deseja colocar o cpf? sim ou nï¿½o ?");
 			resposta = scanner.next();
 			if (resposta == "sim") {
 				while (true) {
 					System.out.println("digite o cpf: ");
 					cpf = scanner.next();
 					if (menucontroller.validarCpf(cpf)) {
-						//verificar se o cliente existe no client data, se não existir o client deve ser cadastrado
+						//verificar se o cliente existe no client data, se nï¿½o existir o client deve ser cadastrado
+						
 						break;
 					}
 						
 					
 
 					else {
-						System.out.println("digite um cpf válido");
+						System.out.println("digite um cpf vï¿½lido");
 					}
 
 				}
 				break;
-			} else if (resposta == "não") {
+			} else if (resposta == "nï¿½o") {
 				break;
 			} else {
-				System.out.println("digite uma resposta válida");
+				System.out.println("digite uma resposta vï¿½lida");
 			}
 		}
 		Integer opcao;
 		PaymentMethod paymentmethod;
 		while (true) {
-			System.out.println("digite a forma de pagamento: 1- cartão de crédito | 2 -cartão de débito | 3- dinheiro| 4-pix");
+			System.out.println("digite a forma de pagamento: 1- cartï¿½o de crï¿½dito | 2 -cartï¿½o de dï¿½bito | 3- dinheiro| 4-pix");
 			opcao=scanner.nextInt();
 			switch(opcao) {
 			case 1:
 				paymentmethod=PaymentMethod.CARTAODECREDITO;
-				//pedir dados 
+				System.out.println("Digite o numero do CartÃ£o"); 
+				
 				break;
 			case 2:
 				paymentmethod=PaymentMethod.CARTAODEDEBITO;
@@ -175,7 +178,7 @@ public class MainMenu {
 				//pedir dados 
 				break;
 			default:
-				System.out.println("opção inválida");
+				System.out.println("opï¿½ï¿½o invï¿½lida");
 				continue;
 			}
 			break;
@@ -186,7 +189,7 @@ public class MainMenu {
 	}
 
 	private String metodoProvisorio(String sku) {
-		return "isto é um produto";
+		return "isto ï¿½ um produto";
 
 	}
 

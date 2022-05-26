@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 
 public class ProductData {
-	ArrayList<Product> productList = new ArrayList<Product>();
+	private static ArrayList<Product> productList = new ArrayList<Product>();
 	
 	public void saveProduct(Product product) {
-		this.productList.add(product);
+		ProductData.productList.add(product);
 	}
 	
 	public void updateProduct(Product product) {
@@ -40,7 +40,7 @@ public class ProductData {
 		return null;
 	}
 	
-	public ArrayList<Product> getAllProducts () {
+	public ArrayList<Product> getAllProducts() {
 		if(productList != null) {
 			return productList;
 		}

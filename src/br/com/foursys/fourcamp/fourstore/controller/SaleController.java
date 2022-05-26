@@ -12,14 +12,42 @@ public class SaleController {
 	
 	SaleService saleService = new SaleService();
 	
+	public String addCart(String sku, Integer quantity) {
+		if(saleService.addCart(sku, quantity)) {
+			return "Produto adicionado com sucesso!";
+		}
+		return "O produto não pode ser adicionado";
+	}
+	
+	public String clearCart() {
+		saleService.clearCart();
+		return "Carrinho limpo";
+	}
+	
+	public List<Product> cart() {
+		return saleService.cart();
+	}
+	
+	public String saleRegister(List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
+		String retorno = "";
+		if(products != null && amountValue != null && paymentMethod != null) { // trocar
+			Sale sale = new Sale(products, amountValue, paymentMethod);
+			//verificarEstoque(List<products>) em service
+			saleService.saveSale(sale);
+			retorno = "\nVenda realizada com sucesso!\n\n" + sale.toString();
+			return retorno;
+		} else {
+			return "Não foi possível registrar a venda";
+		}
+	}
+	
 	public String saleRegister(Client client, List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
 		String retorno = "";
-		
-		if(client != null && products != null && amountValue != null && paymentMethod != null) {
+		if(client != null && products != null && amountValue != null && paymentMethod != null) { // trocar
 			Sale sale = new Sale(client, products, amountValue, paymentMethod);
 			//verificarEstoque(List<products>) em service
 			saleService.saveSale(sale);
-			retorno = sale.toString();
+			retorno = "\nVenda realizada com sucesso!\n\n" + sale.toString();
 			return retorno;
 		} else {
 			return "Não foi possível registrar a venda";

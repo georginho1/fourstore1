@@ -15,4 +15,5 @@ public class SaleData {
 	public ArrayList<Sale> list() {
 			return saleList;
 	}
+	
 }
