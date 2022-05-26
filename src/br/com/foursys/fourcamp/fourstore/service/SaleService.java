@@ -32,7 +32,8 @@ public class SaleService {
 	
 	public boolean addCart(String sku, Integer quantity) {
 			if(productController.haveStock(sku, quantity)) {
-				Product product = productController.getProductBySku(sku);
+				Product product = productController.getProductBySkuObject(sku);
+				product.setQuantity(product.getQuantity() - quantity);
 				cart.add(product);
 				return true;
 			}
