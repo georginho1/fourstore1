@@ -1,5 +1,6 @@
 package br.com.foursys.fourcamp.fourstore.controller;
 
+import br.com.foursys.fourcamp.fourstore.enums.CategoryEnum;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 import br.com.foursys.fourcamp.fourstore.service.ProductService;
 
@@ -24,7 +25,7 @@ public class ProductController {
 						+ "\n Tipo: " + product.getType()
 						+ "\n Tamanho: " + product.getSize()
 						+ "\n Cor: " + product.getColor()
-						+ "\n Categotia: " + product.getCategory()
+						+ "\n Categotia: " + product.getCategory() //.getDescription() caso quiser descrição
 						+ "\n Estação: " + product.getSeason()
 						+ "\n Quantidade: " + product.getQuantity()
 						+ "\n Preço de Compra: " + product.getPurchasePrice()
