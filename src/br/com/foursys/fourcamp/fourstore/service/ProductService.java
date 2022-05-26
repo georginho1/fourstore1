@@ -89,7 +89,7 @@ public class ProductService {
 	}
 	
 	public Product getProductBySkuObject(String sku) {
-		return data.getProductBySkuObject(sku);
+		return productData.getProductBySku(sku);
 	}
 	
 }

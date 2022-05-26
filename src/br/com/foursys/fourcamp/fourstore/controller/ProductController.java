@@ -51,7 +51,7 @@ public class ProductController {
 	}
 	
 	public Product getProductBySkuObject(String sku) {
-		return productService.getProductBySku(sku);
+		return productService.getProductBySkuObject(sku);
 	}
 
 }
