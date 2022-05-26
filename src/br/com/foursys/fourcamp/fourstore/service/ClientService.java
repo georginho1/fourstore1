@@ -75,7 +75,7 @@ public class ClientService {
 
 	public void registerClient(String nome, String cpf) {
 		Client cliente = new Client(nome, cpf);
-		clientData.createClient(cliente);
+		clientData.save(cliente);
 	}
 
 }
