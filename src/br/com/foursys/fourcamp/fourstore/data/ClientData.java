@@ -6,39 +6,39 @@ import br.com.foursys.fourcamp.fourstore.model.Client;
 
 public class ClientData {
 
-	ArrayList<Client> clientList = new ArrayList<Client>();
+	static ArrayList<Client> clientList = new ArrayList<Client>();
 
 	public void createClient(Client client) {
-		if(!this.clientList.contains(client)) {
-			this.clientList.add(client);
+		if(!clientList.contains(client)) {
+			clientList.add(client);
 		}	
 	}
 
 	public String listAllClient() {
 		String retorno = "";
-		for (int x = 0; x < this.clientList.size(); x++) {
-			retorno = retorno + "\n" + this.clientList.get(x);
+		for (int x = 0; x < clientList.size(); x++) {
+			retorno = retorno + "\n" + clientList.get(x);
 		}
 		return retorno;
 	}
 
 	public void updateClient(Client client) {
-		for (int x = 0; x < this.clientList.size(); x++) {
-			if (client.getCpf() == this.clientList.get(x).getCpf()) {
-				this.clientList.set(x, client);
+		for (int x = 0; x < clientList.size(); x++) {
+			if (client.getCpf() == clientList.get(x).getCpf()) {
+				clientList.set(x, client);
 			}
 		}
 	}
 	
 	public void deleteClient(Client client) {
-		this.clientList.remove(client);
+		clientList.remove(client);
 	}
 
 	public Client findByCPF(String cpf) {
 		Client cliente = null;
-		for (int x = 0; x < this.clientList.size(); x++) {
-			if (cpf == this.clientList.get(x).getCpf()) {
-				cliente = this.clientList.get(x);
+		for (int x = 0; x < clientList.size(); x++) {
+			if (cpf == clientList.get(x).getCpf()) {
+				cliente = clientList.get(x);
 				return cliente;
 			}
 		}

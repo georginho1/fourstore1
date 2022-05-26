@@ -3,7 +3,12 @@ package br.com.foursys.fourcamp.fourstore.service;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import br.com.foursys.fourcamp.fourstore.data.ClientData;
+
 public class ClientService {
+	
+	ClientData clientData = new ClientData();
+	
 	public Boolean cpfValidation(String cpf) {
 		
 		
@@ -59,6 +64,14 @@ public class ClientService {
 			return true;
 		else
 			return false;
+	}
+	
+	public boolean clientIsRegistered(String cpf) {
+		if(clientData.findByCPF(cpf) != null) {
+			return true;
+		}
+		
+		return false;
 	}
 
 }
