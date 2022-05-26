@@ -2,9 +2,11 @@ package br.com.foursys.fourcamp.fourstore.controller;
 
 import br.com.foursys.fourcamp.fourstore.model.Product;
 import br.com.foursys.fourcamp.fourstore.service.ProductService;
+import br.com.foursys.fourcamp.fourstore.utils.Validations;
 
 public class ProductController {
-	private static ProductService productService = new ProductService();;
+	private static ProductService productService = new ProductService();
+	private static Validations validations = new Validations();
 	
 	public String cadProduct(String sku, String description, 
 			Integer quantity, Double purchasePrice, Double salePrice) {
@@ -79,5 +81,31 @@ public class ProductController {
 	
 	public String listProducts() {
 		return productService.listProductService();
+	}
+
+	public boolean validateSku(String sku) {
+		if (!validations.validateSkuRegex(sku)) {
+			return false;
+		}
+		
+		int category = Integer.parseInt(sku.substring(2, 4));
+		int color = Integer.parseInt(sku.substring(4, 6));
+		int season = Integer.parseInt(sku.substring(6, 10));
+		int type = Integer.parseInt(sku.substring(10, 12));
+		int size = Integer.parseInt(sku.substring(12, 14));
+		
+		if(category > 40 || category < 31) {
+			return false;
+		} else if (color > 10 || color < 1) {
+			return false;
+		} else if(!(season == 9012 || season == 3030 || season == 3060 || season == 6090)) {
+			return false;
+		} else if(type > 96 || type < 92) {
+			return false;
+		} else if(size > 54 || size < 50) {
+			return false;
+		}
+		
+		return true;
 	}
 }

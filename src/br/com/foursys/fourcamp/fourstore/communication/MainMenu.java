@@ -158,11 +158,12 @@ public class MainMenu {
 		while (true) {
 			System.out.println("Insira o sku do produto");
 			sku = scanner.next();
-			if(!productController.productIsRegistered(sku)) {
-				break;
-			}else {
+			if(productController.productIsRegistered(sku)) {
 				System.out.println("SKU já cadastrado. \n");
-				mainMenu();
+			} else if(!(productController.validateSku(sku))) {
+				System.out.println("SKU inválido");
+			} else {
+				break;
 			}
 		}
 		
@@ -193,7 +194,12 @@ public class MainMenu {
 	private void getProductBySku() {
 		System.out.print("\nInsira o sku do produto: ");
 		String sku = scanner.next();
-		System.out.println(productController.getProductBySku(sku) + "\n");
+		if(!(productController.validateSku(sku))) {
+			System.out.println("SKU inválido");
+		} else {
+			System.out.println(productController.getProductBySku(sku) + "\n");
+		}
+		
 	}
 	
 	private void deleteProductById() {
@@ -204,8 +210,12 @@ public class MainMenu {
 	
 	private void deleteProductBySku() {
 		System.out.print("\nInsira o sku do produto: ");
-		String id = scanner.next();
-		System.out.println(productController.deleteProductBySku(id) + "\n");
+		String sku = scanner.next();
+		if(!(productController.validateSku(sku))) {
+			System.out.println("SKU inválido");
+		}else {
+			System.out.println(productController.deleteProductBySku(sku) + "\n");
+		}
 	}
 //	private void menuClients() {
 //		
