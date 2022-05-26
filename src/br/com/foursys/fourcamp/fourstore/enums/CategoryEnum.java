@@ -2,15 +2,15 @@ package br.com.foursys.fourcamp.fourstore.enums;
 
 public enum CategoryEnum {
 	
-	ACESSORIOS(31, "AcessÛrios"), 
+	ACESSORIOS(31, "Acess√≥rios"), 
 	BERMUDAS(32, "Bermudas"), 
 	BLUSAS(33, "Blusas"), 
-	CALCADOS(34, "CalÁados"),
-	CALCAS(35, "CalÁas"), 
+	CALCADOS(34, "Cal√ßados"),
+	CALCAS(35, "Cal√ßas"), 
 	CAMISETAS(36, "Camisetas"), 
 	CAMISAS(37, "Camisas"), 
 	CASACOS(38, "Casacos"),
-	INTIMA(39, "Moda Õntima"), 
+	INTIMA(39, "Moda √çntima"), 
 	JAQUETAS(40, "Jaquetas");
 
 	private int key;

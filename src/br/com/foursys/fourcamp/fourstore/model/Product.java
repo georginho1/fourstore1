@@ -14,12 +14,6 @@ public class Product {
 	private Double purchasePrice;
 	private Double salePrice;
 
-	
-
-	public Product(String sku, Integer quantity) {	
-		this.sku = sku;
-		this.quantity = quantity;
-	}	
 
 	public Product(String sku, Integer quantity, Double purchasePrice, Double salePrice) {
 		this.sku = sku;
@@ -129,13 +123,12 @@ public class Product {
 	public void setSalePrice(Double salePrice) {
 		this.salePrice = salePrice;
 	}
+	
 	public void update(Product product) {
 		this.quantity+=product.getQuantity();
 		this.salePrice=product.getSalePrice();
 	}
 
-	
-	
 	private void parseSku(String sku) {
 		this.id = sku.substring(0, 2);
 		this.category = sku.substring(2, 4);
@@ -144,13 +137,12 @@ public class Product {
 		this.type = sku.substring(10, 12);
 		this.size = sku.substring(12, 14);
 	}
-	//excluir
+
 	@Override
 	public String toString() {
-		return "Product [sku=" + sku + ", id=" + id + ", description=" + description + ", type=" + type + ", size="
-				+ size + ", color=" + color + ", category=" + category + ", season=" + season + ", quantity=" + quantity
-				+ ", purchasePrice=" + purchasePrice + ", salePrice=" + salePrice + "]\n\n";
+		return "\n\nsku: " + sku + "\nid: " + id + "\nDescricao: " + ((this.description == null) ? "" : this.description)
+				+ "\nTipo: " + type + "\nTamanho: " + size + "\nCor: " + color 
+				+ "\nCategoria: " + category + "\nEsta��o: " + season + "\nQuantidade: " + quantity
+				+ "\nPre�o de compra: " + purchasePrice + "\nPre�o de venda: " + salePrice + "\n\n";
 	}
-
-	
 }
