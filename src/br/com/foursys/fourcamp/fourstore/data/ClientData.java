@@ -2,8 +2,8 @@ package br.com.foursys.fourcamp.fourstore.data;
 
 import java.util.ArrayList;
 
+import br.com.foursys.fourcamp.fourstore.interfaces.*;
 import br.com.foursys.fourcamp.fourstore.model.Client;
-import br.com.foursys.fourcamp.foursoter.interfaces.*;
 
 public class ClientData implements DataInterfaces<Client> {
 

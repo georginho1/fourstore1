@@ -2,8 +2,8 @@ package br.com.foursys.fourcamp.fourstore.data;
 
 import java.util.ArrayList;
 
+import br.com.foursys.fourcamp.fourstore.interfaces.*;
 import br.com.foursys.fourcamp.fourstore.model.Product;
-import br.com.foursys.fourcamp.foursoter.interfaces.*;
 
 public class ProductData implements DataInterfaces<Product> {
 	ArrayList<Product> productList = new ArrayList<Product>();

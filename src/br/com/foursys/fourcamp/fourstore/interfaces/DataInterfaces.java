@@ -1,4 +1,4 @@
-package br.com.foursys.fourcamp.foursoter.interfaces;
+package br.com.foursys.fourcamp.fourstore.interfaces;
 
 import java.util.List;
 
