@@ -3,42 +3,46 @@ package br.com.foursys.fourcamp.fourstore.data;
 import java.util.ArrayList;
 
 import br.com.foursys.fourcamp.fourstore.model.Client;
+import br.com.foursys.fourcamp.foursoter.interfaces.*;
 
-public class ClientData {
+public class ClientData implements DataInterfaces<Client> {
 
-	static ArrayList<Client> clientList = new ArrayList<Client>();
+	ArrayList<Client> clientList = new ArrayList<Client>();
 
-	public void createClient(Client client) {
-		if(!clientList.contains(client)) {
-			clientList.add(client);
+	@Override
+	public void save(Client client) {
+		if(!this.clientList.contains(client)) {
+			this.clientList.add(client);
 		}	
 	}
 
-	public String listAllClient() {
-		String retorno = "";
-		for (int x = 0; x < clientList.size(); x++) {
-			retorno = retorno + "\n" + clientList.get(x);
+	@Override
+	public ArrayList<Client> listAll() {
+		if(clientList != null) {
+			return clientList;
 		}
-		return retorno;
+		return null;
 	}
 
-	public void updateClient(Client client) {
-		for (int x = 0; x < clientList.size(); x++) {
-			if (client.getCpf() == clientList.get(x).getCpf()) {
-				clientList.set(x, client);
+	@Override
+	public void update(Client client) {
+		for (int x = 0; x < this.clientList.size(); x++) {
+			if (client.getCpf() == this.clientList.get(x).getCpf()) {
+				this.clientList.set(x, client);
 			}
 		}
 	}
 	
-	public void deleteClient(Client client) {
-		clientList.remove(client);
+	@Override
+	public void delete(Client client) {
+		this.clientList.remove(client);
 	}
 
 	public Client findByCPF(String cpf) {
 		Client cliente = null;
-		for (int x = 0; x < clientList.size(); x++) {
-			if (cpf == clientList.get(x).getCpf()) {
-				cliente = clientList.get(x);
+		for (int x = 0; x < this.clientList.size(); x++) {
+			if (cpf == this.clientList.get(x).getCpf()) {
+				cliente = this.clientList.get(x);
 				return cliente;
 			}
 		}

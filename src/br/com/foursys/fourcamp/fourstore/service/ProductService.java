@@ -44,7 +44,7 @@ public class ProductService {
 			return false;
 		}
 		
-		this.productData.updateProduct(updatedProduct);
+		this.productData.update(updatedProduct);
 		return true;
 	}
 	
@@ -62,14 +62,14 @@ public class ProductService {
 		if(product == null) {
 			return false;	
 		}
-		this.productData.deleteProduct(product);
+		this.productData.delete(product);
 		return true;
 	}
 	
 	public String listProductService() {
 		String retorno = "";
 		ArrayList<Product> lista = new ArrayList<Product>();
-		lista = productData.getAllProducts();
+		lista = productData.listAll();
 		for (Product list : lista) {
 			retorno += list.toString();
 		}
