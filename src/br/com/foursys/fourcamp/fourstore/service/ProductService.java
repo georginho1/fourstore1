@@ -1,16 +1,16 @@
 package br.com.foursys.fourcamp.fourstore.service;
 
+import java.util.ArrayList;
+
 import br.com.foursys.fourcamp.fourstore.data.ProductData;
 import br.com.foursys.fourcamp.fourstore.model.Product;
-
-import java.util.ArrayList;
 
 public class ProductService {
 	
 	private static ProductData productData = new ProductData();
 
 	public void cadProduct(Product product) {
-		productData.saveProduct(product);
+		productData.save(product);
 	}
 	
 	public boolean productIsRegistered(String sku) {
@@ -55,7 +55,7 @@ public class ProductService {
 			return false;
 		}
 		
-		productData.updateProduct(updatedProduct);
+		productData.update(updatedProduct);
 		return true;
 	}
 	
@@ -73,14 +73,14 @@ public class ProductService {
 		if(product == null) {
 			return false;	
 		}
-		productData.deleteProduct(product);
+		productData.delete(product);
 		return true;
 	}
 	
 	public String listProductService() {
 		String retorno = "";
 		ArrayList<Product> lista = new ArrayList<Product>();
-		lista = productData.getAllProducts();
+		lista = productData.listAll();
 		for (Product list : lista) {
 			retorno += list.toString();
 		}
