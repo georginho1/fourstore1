@@ -17,8 +17,8 @@ public enum SizeEnum {
 	
 	public static final Map<String, SizeEnum> sizeMap = new HashMap<String, SizeEnum>();
 	static {
-		for (SizeEnum category : EnumSet.allOf(SizeEnum.class)) {
-			sizeMap.put(category.getKey(), category);
+		for (SizeEnum size : EnumSet.allOf(SizeEnum.class)) {
+			sizeMap.put(size.getKey(), size);
 		}
 	}
 	

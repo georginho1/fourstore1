@@ -3,19 +3,99 @@ package br.com.foursys.fourcamp.fourstore.service;
 import br.com.foursys.fourcamp.fourstore.data.ProductData;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 
+import java.util.ArrayList;
+
 public class ProductService {
 	
-	ProductData data = new ProductData();
+	private static ProductData productData = new ProductData();
 
 	public void cadProduct(Product product) {
-		data.saveProduct(product);
+		productData.saveProduct(product);
 	}
 	
 	public boolean productIsRegistered(String sku) {
-		if(data.getProductBySku(sku) == null) {
+		if(productData.getProductBySku(sku) == null) {
 			return false;
 		}
 		return true;
 	}
+	
+	public Product getById(String id) {
+		return productData.getProductById(id);
+	}
+	
+	public Product getBySku(String sku) {
+		return productData.getProductBySku(sku);
+	}
+	
+	public Boolean updateBySku(Product updatedProduct) {
+		String Sku = updatedProduct.getSku();
 
+		Product originalProduct = productData.getProductBySku(Sku);
+		if(originalProduct == null) {
+			return false;
+		}
+
+		return update(updatedProduct);
+	}
+	
+	private Boolean update(Product updatedProduct) { 
+		Integer updatedQuantity = updatedProduct.getQuantity();
+		if(updatedQuantity == null || updatedQuantity < 0) {
+			return false;
+		}
+		
+		Double updatedPurchasePrice = updatedProduct.getPurchasePrice();
+		if(updatedPurchasePrice == null || updatedPurchasePrice < 0) {
+			return false;
+		}
+		
+		Double updatedSalePrice = updatedProduct.getSalePrice();
+		if(updatedSalePrice == null || updatedSalePrice < 0) {
+			return false;
+		}
+		
+		productData.updateProduct(updatedProduct);
+		return true;
+	}
+	
+	public Boolean deleteProductById(String id) {
+		Product product = productData.getProductById(id);
+		return this.deleteProduct(product);
+	}
+	
+	public Boolean deleteProductBySky(String sku) {
+		Product product = productData.getProductBySku(sku);
+		return this.deleteProduct(product);
+	}
+	
+	private Boolean deleteProduct(Product product) {
+		if(product == null) {
+			return false;	
+		}
+		productData.deleteProduct(product);
+		return true;
+	}
+	
+	public String listProductService() {
+		String retorno = "";
+		ArrayList<Product> lista = new ArrayList<Product>();
+		lista = productData.getAllProducts();
+		for (Product list : lista) {
+			retorno += list.toString();
+		}
+		return retorno;
+	}
+	
+	public Boolean haveStock(String sku, Integer quantity) {
+		Product productInStock = productData.getProductBySku(sku);
+		if(productInStock != null) {
+			Integer quantityInStock = productInStock.getQuantity();
+			if(quantityInStock >= quantity) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
