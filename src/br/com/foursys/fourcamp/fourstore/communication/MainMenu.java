@@ -1,22 +1,28 @@
 package br.com.foursys.fourcamp.fourstore.communication;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
+import br.com.foursys.fourcamp.fourstore.controller.ClientController;
 import br.com.foursys.fourcamp.fourstore.controller.MenuController;
 import br.com.foursys.fourcamp.fourstore.controller.SaleController;
 import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
+import br.com.foursys.fourcamp.fourstore.model.Client;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 
 public class MainMenu {
 	private Scanner scanner;
 	private MenuController menucontroller;
 	private SaleController salecontroller;
-
+	private ClientController clientcontroller;
+	
 	public MainMenu() {
 		this.menucontroller = new MenuController();
 		this.scanner = new Scanner(System.in);
-		this.salecontroller=new SaleController();
+		this.salecontroller = new SaleController();
+		this.clientcontroller = new ClientController();
 	}
 
 	public void mainMenu() {
@@ -26,7 +32,7 @@ public class MainMenu {
 	}
 
 	private void primaryMenu() {
-		
+
 		Integer option = -1;
 		String entrada;
 
@@ -40,8 +46,7 @@ public class MainMenu {
 			entrada = scanner.nextLine();
 			System.out.println("----------------------------------\n");
 
-			MenuController menuController = new MenuController();
-			option = menuController.validationRegexMenu(entrada, "[0-6]");
+			option = menucontroller.validationRegexMenu(entrada, "[0-6]");
 
 			switch (option) {
 			case 0:
@@ -71,8 +76,7 @@ public class MainMenu {
 			Scanner sc = new Scanner(System.in);
 			entrada = sc.nextLine();
 
-			MenuController menuController = new MenuController();
-			option = menuController.validationRegexMenu(entrada, "[0-6]");
+			option = menucontroller.validationRegexMenu(entrada, "[0-6]");
 			switch (option) {
 			case 0: {
 				primaryMenu();
@@ -97,94 +101,121 @@ public class MainMenu {
 	private void menuDoSale() {
 		String sku;
 		Product product;
-
+		Integer quantidade = 0;
+		Integer quantidadeestoque = 10;
+		Map<String, Integer> products = new HashMap<>();
+		Integer option;
+		
 		while (true) {
-			System.out.println("digite o sku: ");
-			sku = scanner.nextLine();
-			if (metodoProvisorio(sku) == null) {
-				System.out.println("produto n�o existe");
-			} else {
-				//adicionar produto
-			}
+			while (true) {
+				System.out.println("digite o sku: ");
+				sku = scanner.nextLine();
+				scanner.nextLine();
+				if (metodoProvisorio(sku) == null) {
+					System.out.println("produto não existe");
+				} else {
+					System.out.println("digite a quantidade:");
+					quantidade = scanner.nextInt();
+					if (quantidade < 1) {
+						System.out.println("digite 1 ou mais");
+						continue;
+					} else if (quantidade > quantidadeestoque) {
+						System.out.println("digite uma quantidade menor, em estoque só temos " + quantidadeestoque);
+						continue;
+					}
+					break;
+				}
 				break;
-		}
-
-		Integer quantidade;
-		Integer quantidadeestoque = 10;// excluir isto
-		while (true) {
-			System.out.println("digite a quantidade:");
-			quantidade = scanner.nextInt();
-			if (quantidade < 1) {
-				System.out.println("digite 1 ou mais");
-				continue;
-
-			} else if (quantidade > quantidadeestoque) {
-				System.out.println("digite uma quantidade menor, em estoque s� tem " + quantidadeestoque);
-				continue;
 			}
-			break;
-
+			products.put(sku, quantidade);
+			
+			System.out.println("Deseja inserir outro produto?\n 1 - sim\n2 - nao");
+			option = scanner.nextInt();
+			if(option == 1) {
+				continue;
+			}else if(option == 2) {
+				break;
+			}else {
+				System.out.println("Opção invalida");
+			}
+			
 		}
-		String resposta;
+	
+		Integer resposta;
 		String cpf;
-		Boolean clientIsValid = true;
+		Client client;
+		//Boolean clientIsValid = true;
 		while (true) {
-			System.out.println("deseja colocar o cpf? sim ou n�o ?");
-			resposta = scanner.next();
-			if (resposta == "sim") {
+			System.out.println("deseja colocar o cpf? 1-sim ou 2-não ?");
+			resposta = scanner.nextInt();
+			if (resposta == 1) {
 				while (true) {
 					System.out.println("digite o cpf: ");
 					cpf = scanner.next();
 					if (menucontroller.validarCpf(cpf)) {
-						//verificar se o cliente existe no client data, se n�o existir o client deve ser cadastrado
-						
+						if(clientcontroller.clientIsRegistered(cpf)) {
+							client = clientcontroller.findByCPF(cpf);
+						}
+						else{
+							//registerClient(cpf);
+						}
 						break;
 					}
-						
-					
-
-					else {
-						System.out.println("digite um cpf v�lido");
-					}
-
+					System.out.println("CPF invalido ou Cliente Cadastrado");
 				}
 				break;
-			} else if (resposta == "n�o") {
+			} else if (resposta == 2) {
 				break;
 			} else {
-				System.out.println("digite uma resposta v�lida");
+				System.out.println("digite uma resposta válida");
 			}
 		}
 		Integer opcao;
+		String dadosCartaoCredito;
+		String dadosCartaoDebito;
+		String numPix;
 		PaymentMethod paymentmethod;
+		
 		while (true) {
-			System.out.println("digite a forma de pagamento: 1- cart�o de cr�dito | 2 -cart�o de d�bito | 3- dinheiro| 4-pix");
-			opcao=scanner.nextInt();
-			switch(opcao) {
+			System.out.println(
+					"Digite a forma de pagamento: 1- cart�o de cr�dito | 2 -cart�o de d�bito | 3- dinheiro| 4-pix");
+			opcao = scanner.nextInt();
+
+			switch (opcao) {
 			case 1:
-				paymentmethod=PaymentMethod.CARTAODECREDITO;
-				System.out.println("Digite o numero do Cartão"); 
-				
+				paymentmethod = PaymentMethod.CARTAODECREDITO;
+				System.out.println("Digite o numero do Cartão");
+				dadosCartaoCredito = scanner.nextLine();
+				scanner.nextLine();
+				if(!menucontroller.validationCard(dadosCartaoCredito)) {
+					System.out.println("Cartao Invalido");
+					continue;
+				}
 				break;
 			case 2:
-				paymentmethod=PaymentMethod.CARTAODEDEBITO;
-				//pedir dados 
+				paymentmethod = PaymentMethod.CARTAODEDEBITO;
+				dadosCartaoDebito = scanner.nextLine();
+				if(!menucontroller.validationCard(dadosCartaoDebito)) {
+					System.out.println("Cartão Invalido");
+					continue;
+				}
 				break;
 			case 3:
-				paymentmethod=PaymentMethod.DINHEIRO;				
+				paymentmethod = PaymentMethod.DINHEIRO;
 				break;
 			case 4:
-				paymentmethod=PaymentMethod.PIX;
-				//pedir dados 
+				paymentmethod = PaymentMethod.PIX;
+				numPix = scanner.nextLine();
+				//metodo para armazenar o pix
 				break;
 			default:
 				System.out.println("op��o inv�lida");
 				continue;
 			}
 			break;
-			
+
 		}
-		//salecontroller.saleRegister(null, List.of(), null, paymentmethod)
+		// salecontroller.saleRegister(null, List.of(), null, paymentmethod)
 
 	}
 

@@ -1,6 +1,7 @@
 package br.com.foursys.fourcamp.fourstore.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
 import br.com.foursys.fourcamp.fourstore.model.Client;
@@ -16,7 +17,7 @@ public class SaleController {
 		if(saleService.addCart(sku, quantity)) {
 			return "Produto adicionado com sucesso!";
 		}
-		return "O produto não pode ser adicionado";
+		return "O produto nï¿½o pode ser adicionado";
 	}
 	
 	public String clearCart() {
@@ -37,7 +38,7 @@ public class SaleController {
 			retorno = "\nVenda realizada com sucesso!\n\n" + sale.toString();
 			return retorno;
 		} else {
-			return "Não foi possível registrar a venda";
+			return "Nï¿½o foi possï¿½vel registrar a venda";
 		}
 	}
 	
@@ -50,14 +51,18 @@ public class SaleController {
 			retorno = "\nVenda realizada com sucesso!\n\n" + sale.toString();
 			return retorno;
 		} else {
-			return "Não foi possível registrar a venda";
+			return "Nï¿½o foi possï¿½vel registrar a venda";
 		}
+	}
+	
+	public String saleRegister(Client client, Map<String, Integer> products, PaymentMethod paymentMethod) {
+		return null;
 	}
 	
 	public String saleConsultation() {
 		String retorno = "";
 		if(saleService.listSale().size() == 0) {
-			retorno = "Não há nunhum histórico de vendas!";
+			retorno = "Nï¿½o hï¿½ nunhum histï¿½rico de vendas!";
 			return retorno;
 		}
 		retorno = saleService.listSale().toString();

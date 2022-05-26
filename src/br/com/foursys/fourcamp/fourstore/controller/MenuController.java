@@ -20,5 +20,10 @@ public class MenuController {
 		return isValid;
 		
 	}
+	
+	public boolean validationCard(String acceptedCards) {
+		return validations.validateCard(acceptedCards);
+	}
+	
 		
 }

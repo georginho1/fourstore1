@@ -29,7 +29,7 @@ public class Validations {
 		return retorno;
 	}
 
-	public boolean checkLuhn(String value) {
+	private boolean checkLuhn(String value) {
 		value = value.replace(" ", "");
 		int sum = 0;
 		boolean shouldDouble = false;
@@ -60,7 +60,7 @@ public class Validations {
 		return true;
 
 	}
-public Boolean cpfValidation(String cpf) {
+	public Boolean cpfValidation(String cpf) {
 		
 		
 		String pattern = "([0-9]{3}[\\.][0-9]{3}[\\.][0-9]{3}[\\-][0-9]{2})";
@@ -73,7 +73,7 @@ public Boolean cpfValidation(String cpf) {
 			return false;
 		}
 		
-		// o código acima deve ir para o controller
+		// o cï¿½digo acima deve ir para o controller
 		
 		String S1, S2, S3, S4, S5, S6, S7, S8, S9, check = "";
 		int N1, N2, N3, N4, N5, N6, N7, N8, N9, verify1, verify2;
