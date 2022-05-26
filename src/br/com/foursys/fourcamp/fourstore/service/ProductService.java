@@ -19,29 +19,12 @@ public class ProductService {
 	
 	public Boolean updateBySku(Product updatedProduct) {
 		String Sku = updatedProduct.getSku();
-		if( Sku == null) {
-			return false;
-		}
-		
+
 		Product originalProduct = this.productData.getProductBySku(Sku);
 		if(originalProduct == null) {
 			return false;
 		}
-		
-		return update(updatedProduct);
-	}
-	
-	public Boolean updateById(Product updatedProduct) {
-		String id = updatedProduct.getId();
-		if( id == null) {
-			return false;
-		}
-		
-		Product originalProduct = this.productData.getProductById(id);
-		if(originalProduct == null) {
-			return false;
-		}
-		
+
 		return update(updatedProduct);
 	}
 	
@@ -65,16 +48,23 @@ public class ProductService {
 		return true;
 	}
 	
-	public Boolean deleteById(String id) {
+	public Boolean deleteProductById(String id) {
 		Product product = this.productData.getProductById(id);
+		return this.deleteProduct(product);
+	}
+	
+	public Boolean deleteProductBySky(String sku) {
+		Product product = this.productData.getProductBySku(sku);
+		return this.deleteProduct(product);
+	}
+	
+	private Boolean deleteProduct(Product product) {
 		if(product == null) {
-			return false;
+			return false;	
 		}
-		
 		this.productData.deleteProduct(product);
 		return true;
 	}
-
 	
 	public String listProductService() {
 		String retorno = "";
@@ -98,4 +88,3 @@ public class ProductService {
 		return false;
 	}
 }
-
