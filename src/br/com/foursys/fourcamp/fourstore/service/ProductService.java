@@ -6,21 +6,32 @@ import br.com.foursys.fourcamp.fourstore.data.ProductData;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 
 public class ProductService {
+	
+	private static ProductData productData = new ProductData();
 
-	private ProductData productData = new ProductData();
+	public void cadProduct(Product product) {
+		productData.save(product);
+	}
+	
+	public boolean productIsRegistered(String sku) {
+		if(productData.getProductBySku(sku) == null) {
+			return false;
+		}
+		return true;
+	}
 	
 	public Product getById(String id) {
-		return this.productData.getProductById(id);
+		return productData.getProductById(id);
 	}
 	
 	public Product getBySku(String sku) {
-		return this.productData.getProductBySku(sku);
+		return productData.getProductBySku(sku);
 	}
 	
 	public Boolean updateBySku(Product updatedProduct) {
 		String Sku = updatedProduct.getSku();
 
-		Product originalProduct = this.productData.getProductBySku(Sku);
+		Product originalProduct = productData.getProductBySku(Sku);
 		if(originalProduct == null) {
 			return false;
 		}
@@ -44,17 +55,17 @@ public class ProductService {
 			return false;
 		}
 		
-		this.productData.updateProduct(updatedProduct);
+		productData.update(updatedProduct);
 		return true;
 	}
 	
 	public Boolean deleteProductById(String id) {
-		Product product = this.productData.getProductById(id);
+		Product product = productData.getProductById(id);
 		return this.deleteProduct(product);
 	}
 	
 	public Boolean deleteProductBySky(String sku) {
-		Product product = this.productData.getProductBySku(sku);
+		Product product = productData.getProductBySku(sku);
 		return this.deleteProduct(product);
 	}
 	
@@ -62,14 +73,14 @@ public class ProductService {
 		if(product == null) {
 			return false;	
 		}
-		this.productData.deleteProduct(product);
+		productData.delete(product);
 		return true;
 	}
 	
 	public String listProductService() {
 		String retorno = "";
 		ArrayList<Product> lista = new ArrayList<Product>();
-		lista = productData.getAllProducts();
+		lista = productData.listAll();
 		for (Product list : lista) {
 			retorno += list.toString();
 		}

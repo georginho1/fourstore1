@@ -11,6 +11,11 @@ public class Client {
 		this.pixKey = pixKey;
 	}
 
+	public Client(String name, String cpf) {
+		this.name = name;
+		this.cpf = cpf;
+	}
+
 	public String getName() {
 		return name;
 	}
