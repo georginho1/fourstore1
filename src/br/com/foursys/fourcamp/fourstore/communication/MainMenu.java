@@ -1,10 +1,23 @@
 package br.com.foursys.fourcamp.fourstore.communication;
 
+import java.util.List;
 import java.util.Scanner;
 
 import br.com.foursys.fourcamp.fourstore.controller.MenuController;
+import br.com.foursys.fourcamp.fourstore.controller.SaleController;
+import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
+import br.com.foursys.fourcamp.fourstore.model.Product;
 
 public class MainMenu {
+	private Scanner scanner;
+	private MenuController menucontroller;
+	private SaleController salecontroller;
+
+	public MainMenu() {
+		this.menucontroller = new MenuController();
+		this.scanner = new Scanner(System.in);
+		this.salecontroller=new SaleController();
+	}
 
 	public void mainMenu() {
 
@@ -13,7 +26,7 @@ public class MainMenu {
 	}
 
 	private void primaryMenu() {
-		Scanner scanner = new Scanner(System.in);
+		
 		Integer option = -1;
 		String entrada;
 
@@ -66,7 +79,8 @@ public class MainMenu {
 				break;
 			}
 			case 1: {
-				// saleConsultation(); metodo para consultar venda
+				menuDoSale();
+
 				break;
 			}
 			case 2: {
@@ -77,6 +91,102 @@ public class MainMenu {
 				System.out.println("\nOpção invalida. Tente Novamente. \n");
 			}
 		}
+
+	}
+
+	private void menuDoSale() {
+		String sku;
+		Product product;
+
+		while (true) {
+			System.out.println("digite o sku: ");
+			sku = scanner.nextLine();
+			if (metodoProvisorio(sku) == null) {
+				System.out.println("produto não existe");
+			} else {
+				//adicionar produto
+			}
+				break;
+		}
+
+		Integer quantidade;
+		Integer quantidadeestoque = 10;// excluir isto
+		while (true) {
+			System.out.println("digite a quantidade:");
+			quantidade = scanner.nextInt();
+			if (quantidade < 1) {
+				System.out.println("digite 1 ou mais");
+				continue;
+
+			} else if (quantidade > quantidadeestoque) {
+				System.out.println("digite uma quantidade menor, em estoque só tem " + quantidadeestoque);
+				continue;
+			}
+			break;
+
+		}
+		String resposta;
+		String cpf;
+		while (true) {
+			System.out.println("deseja colocar o cpf? sim ou não ?");
+			resposta = scanner.next();
+			if (resposta == "sim") {
+				while (true) {
+					System.out.println("digite o cpf: ");
+					cpf = scanner.next();
+					if (menucontroller.validarCpf(cpf)) {
+						//verificar se o cliente existe no client data, se não existir o client deve ser cadastrado
+						break;
+					}
+						
+					
+
+					else {
+						System.out.println("digite um cpf válido");
+					}
+
+				}
+				break;
+			} else if (resposta == "não") {
+				break;
+			} else {
+				System.out.println("digite uma resposta válida");
+			}
+		}
+		Integer opcao;
+		PaymentMethod paymentmethod;
+		while (true) {
+			System.out.println("digite a forma de pagamento: 1- cartão de crédito | 2 -cartão de débito | 3- dinheiro| 4-pix");
+			opcao=scanner.nextInt();
+			switch(opcao) {
+			case 1:
+				paymentmethod=PaymentMethod.CARTAODECREDITO;
+				//pedir dados 
+				break;
+			case 2:
+				paymentmethod=PaymentMethod.CARTAODEDEBITO;
+				//pedir dados 
+				break;
+			case 3:
+				paymentmethod=PaymentMethod.DINHEIRO;				
+				break;
+			case 4:
+				paymentmethod=PaymentMethod.PIX;
+				//pedir dados 
+				break;
+			default:
+				System.out.println("opção inválida");
+				continue;
+			}
+			break;
+			
+		}
+		//salecontroller.saleRegister(null, List.of(), null, paymentmethod)
+
+	}
+
+	private String metodoProvisorio(String sku) {
+		return "isto é um produto";
 
 	}
 

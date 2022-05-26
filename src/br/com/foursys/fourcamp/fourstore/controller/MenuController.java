@@ -3,11 +3,21 @@ package br.com.foursys.fourcamp.fourstore.controller;
 import br.com.foursys.fourcamp.fourstore.utils.Validations;
 
 public class MenuController {
-
+	Validations validations;
+	public MenuController() {
+		this.validations=new Validations();
+		
+	}
 	public int validationRegexMenu(String entrada, String verificMenu) {
 		
-		Validations validations = new Validations();
+		
 		return validations.validationMenu(entrada, verificMenu);
+		
+	}
+	
+	public boolean validarCpf(String cpf) {
+		boolean isValid=validations.cpfValidation(cpf);
+		return isValid;
 		
 	}
 		
