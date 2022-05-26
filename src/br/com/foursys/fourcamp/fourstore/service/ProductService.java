@@ -18,54 +18,58 @@ public class ProductService {
 	}
 	
 	public Boolean updateBySku(Product updatedProduct) {
-		if(updatedProduct.getSku() == null) return false;
+		String Sku = updatedProduct.getSku();
+		if( Sku == null) {
+			return false;
+		}
 		
-		Product originalProduct = this.productData.getProductBySku(updatedProduct.getSku());
-		if(originalProduct == null) return false;
+		Product originalProduct = this.productData.getProductBySku(Sku);
+		if(originalProduct == null) {
+			return false;
+		}
 		
-		updatedProduct.setId(originalProduct.getId());
-		update(originalProduct, updatedProduct);
-		return true;
+		return update(updatedProduct);
 	}
 	
 	public Boolean updateById(Product updatedProduct) {
-		if(updatedProduct.getId() == null) return false;
+		String id = updatedProduct.getId();
+		if( id == null) {
+			return false;
+		}
 		
-		Product originalProduct = this.productData.getProductById(updatedProduct.getId());
-		if(originalProduct == null) return false;
+		Product originalProduct = this.productData.getProductById(id);
+		if(originalProduct == null) {
+			return false;
+		}
 		
-		update(originalProduct, updatedProduct);
-		return true;
+		return update(updatedProduct);
 	}
 	
-	private Boolean update(Product originalProduct, Product updatedProduct) { 
-		if(updatedProduct.getSku() != null) originalProduct.setSku(updatedProduct.getSku());
-		
+	private Boolean update(Product updatedProduct) { 
 		Integer updatedQuantity = updatedProduct.getQuantity();
-		if(updatedQuantity != null) {
-			if(updatedQuantity < 0 ) return false;
-			originalProduct.setQuantity(updatedQuantity);
+		if(updatedQuantity == null || updatedQuantity < 0) {
+			return false;
 		}
 		
 		Double updatedPurchasePrice = updatedProduct.getPurchasePrice();
-		if(updatedPurchasePrice != null) {
-			if(updatedPurchasePrice < 0) return false;
-			originalProduct.setPurchasePrice(updatedPurchasePrice);
+		if(updatedPurchasePrice == null || updatedPurchasePrice < 0) {
+			return false;
 		}
 		
 		Double updatedSalePrice = updatedProduct.getSalePrice();
-		if(updatedSalePrice != null) {
-			if(updatedSalePrice < 0) return false;
-			originalProduct.setSalePrice(updatedSalePrice);
+		if(updatedSalePrice == null || updatedSalePrice < 0) {
+			return false;
 		}
 		
-		this.productData.updateProduct(originalProduct);
+		this.productData.updateProduct(updatedProduct);
 		return true;
 	}
 	
 	public Boolean deleteById(String id) {
 		Product product = this.productData.getProductById(id);
-		if(product == null) return false;
+		if(product == null) {
+			return false;
+		}
 		
 		this.productData.deleteProduct(product);
 		return true;
@@ -75,7 +79,6 @@ public class ProductService {
 	public String listProductService() {
 		String retorno = "";
 		ArrayList<Product> lista = new ArrayList<Product>();
-		ProductData productData = new ProductData();
 		lista = productData.getAllProducts();
 		for (Product list : lista) {
 			retorno += list.toString();
