@@ -5,15 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum ColorEnum {
-	AMARELO("11" , "Amarelo"), 
-	AZUL("22" , "Azul"), 
-	BRANCO("33", "Branco"), 
-	CINZA("44", "Cinza"), 
-	LARANJA("55", "Laranja"), 
-	MARROM("66" , "Marrom"), 
-	PRETO("77", "Preto"), 
-	ROXO("88" , "Roxo"), 
-	VERDE("99" , "Verde"), 
+	AMARELO("01" , "Amarelo"), 
+	AZUL("02" , "Azul"), 
+	BRANCO("03", "Branco"), 
+	CINZA("04", "Cinza"), 
+	LARANJA("05", "Laranja"), 
+	MARROM("06" , "Marrom"), 
+	PRETO("07", "Preto"), 
+	ROXO("08" , "Roxo"), 
+	VERDE("09" , "Verde"), 
 	VERMELHO("10", "Vermelho");
 
 	private String key;
