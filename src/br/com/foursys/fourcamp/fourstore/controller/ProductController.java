@@ -1,7 +1,9 @@
 package br.com.foursys.fourcamp.fourstore.controller;
 
+
 import br.com.foursys.fourcamp.fourstore.model.Product;
 import br.com.foursys.fourcamp.fourstore.service.ProductService;
+
 
 public class ProductController {
 	private ProductService productService;
@@ -42,4 +44,7 @@ public class ProductController {
 		return (this.productService.updateById(id, product)) ? "Produto alterado com sucesso!" : "Dados inválidos! O produto não foi alterado.";
 	}
 	
+	public String listProducts() {
+		return productService.listProductService();
+	}
 }

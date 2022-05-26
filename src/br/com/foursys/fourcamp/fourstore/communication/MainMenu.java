@@ -92,6 +92,7 @@ public class MainMenu {
 	private void menuProducts() {
 		int option = -1;
 		String entrada;
+		ProductController productController = new ProductController();
 
 		while (option != 0) {
 			System.out.println("1 - Cadastrar Produto" + "\n2 - Buscar Produto por id" + "\n3 - Buscar Produto por sku"
@@ -122,7 +123,8 @@ public class MainMenu {
 				break;
 			}
 			case 4: {
-				// listarProdutos(); metodo para listar produtos
+				String retorno = productController.listProducts();// metodo para listar produtos
+				System.out.println(retorno);
 				break;
 			}
 			case 5: {
