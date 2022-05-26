@@ -18,25 +18,24 @@ public class ProductService {
 		return this.productData.getProductBySku(sku);
 	}
 	
-	public Boolean updateBySku(Product updatedProduct) {
-		if(updatedProduct.getSku() == null) return false;
+	public Boolean updateBySku(String originalSku, Product updatedProduct) {
+		if(originalSku == null || updatedProduct == null) return false; 
 		
-		Product originalProduct = this.productData.getProductBySku(updatedProduct.getSku());
+		Product originalProduct = this.productData.getProductBySku(originalSku);
 		if(originalProduct == null) return false;
 		
 		updatedProduct.setId(originalProduct.getId());
-		update(originalProduct, updatedProduct);
-		return true;
+		return update(originalProduct, updatedProduct);
 	}
 	
-	public Boolean updateById(Product updatedProduct) {
-		if(updatedProduct.getId() == null) return false;
+	public Boolean updateById(String id, Product updatedProduct) {
+		if(id == null || updatedProduct == null) return false;
 		
-		Product originalProduct = this.productData.getProductById(updatedProduct.getId());
+		Product originalProduct = this.productData.getProductById(id);
 		if(originalProduct == null) return false;
 		
-		update(originalProduct, updatedProduct);
-		return true;
+		updatedProduct.setId(id);
+		return update(originalProduct, updatedProduct);
 	}
 	
 	private Boolean update(Product originalProduct, Product updatedProduct) { 
@@ -64,12 +63,19 @@ public class ProductService {
 		return true;
 	}
 	
-	public Boolean deleteById(String id) {
+	public Boolean deleteProductById(String id) {
 		Product product = this.productData.getProductById(id);
-		if(product == null) return false;
-		
+		return this.deleteProduct(product);
+	}
+	
+	public Boolean deleteProductBySky(String sku) {
+		Product product = this.productData.getProductBySku(sku);
+		return this.deleteProduct(product);
+	}
+	
+	private Boolean deleteProduct(Product product) {
+		if(product == null) return false;	
 		this.productData.deleteProduct(product);
 		return true;
 	}
 }
-

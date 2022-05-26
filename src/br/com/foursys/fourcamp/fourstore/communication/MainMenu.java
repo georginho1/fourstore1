@@ -3,8 +3,17 @@ package br.com.foursys.fourcamp.fourstore.communication;
 import java.util.Scanner;
 
 import br.com.foursys.fourcamp.fourstore.controller.MenuController;
+import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 
 public class MainMenu {
+	
+	private Scanner scanner;
+	private ProductController productController;
+	
+	public MainMenu() {
+		this.scanner = new Scanner(System.in);
+		this.productController = new ProductController();
+	}
 
 	public void mainMenu() {
 
@@ -85,15 +94,15 @@ public class MainMenu {
 		String entrada;
 
 		while (option != 0) {
-			System.out.println("1 - Cadastrar Produto" + "\n2 - Buscar Produto (ID)" + "\n3 - Buscar Produto (SKU)"
-					+ "\n4 - Lista Produtos" + "\n5 - Atualizar Produtos" + "\n6 - Excluir Produto"
-					+ "\n0 - Para voltar");
+			System.out.println("1 - Cadastrar Produto" + "\n2 - Buscar Produto por id" + "\n3 - Buscar Produto por sku"
+					+ "\n4 - Lista Produtos" + "\n5 - Atualizar Produto por id" + "\n6 - Atualizar produto por sku"
+					+ "\n7 - Excluir Produto pelo id" + "\n8 - Excluir Produto pelo sku" + "\n0 - Para voltar");
 
 			Scanner sc = new Scanner(System.in);
 			entrada = sc.nextLine();
 
 			MenuController menuController = new MenuController();
-			option = menuController.validationRegexMenu(entrada, "[0-6]");
+			option = menuController.validationRegexMenu(entrada, "[0-8]");
 
 			switch (option) {
 			case 0: {
@@ -105,11 +114,11 @@ public class MainMenu {
 				break;
 			}
 			case 2: {
-				// buscarProdutoId(); metodo para buscar produto pelo ID
+				this.getProductById();
 				break;
 			}
 			case 3: {
-				// buscarProdutoSku(); metodo para buscar pelo SKU
+				this.getProductBySku();
 				break;
 			}
 			case 4: {
@@ -117,22 +126,53 @@ public class MainMenu {
 				break;
 			}
 			case 5: {
-				// atualizarProdutos(); metodo para atualizar produtos
+				// updateProductById(); metodo para atualizar produtos, encontrando pelo id
 				break;
 			}
 			case 6: {
-				// excluirProdutos(); metodo para excluir produtos
+				// updateProductBySku(); metodo para atualizar produtos, encontrando pelo sku
+				break;
+			}
+			case 7: {
+				this.deleteProductById();
+				break;
+			}
+			case 8: {
+				this.deleteProductBySku();
 				break;
 			}
 			default:
-				System.out.println("\nOpÃ§Ã£o Invalida. Tente Novamente \n");
+				System.out.println("\nOpção Invalida. Tente Novamente \n");
 			}
 		}
-
+	}
+	
+	private void getProductById() {
+		System.out.print("\nInsira o id do produto: ");
+		String id = scanner.next();
+		System.out.println(this.productController.getProductById(id) + "\n");
+	}
+	
+	private void getProductBySku() {
+		System.out.print("\nInsira o sku do produto: ");
+		String sku = scanner.next();
+		System.out.println(this.productController.getProductBySku(sku) + "\n");
+	}
+	
+	private void deleteProductById() {
+		System.out.print("\nInsira o id do produto: ");
+		String id = scanner.next();
+		System.out.println(this.productController.deleteProductById(id) + "\n");
+	}
+	
+	private void deleteProductBySku() {
+		System.out.print("\nInsira o sku do produto: ");
+		String id = scanner.next();
+		System.out.println(this.productController.deleteProductBySku(id) + "\n");
+	}
 //	private void menuClients() {
 //		
 //		
 //	}
 //		
-	}
 }
