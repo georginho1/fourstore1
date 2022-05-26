@@ -2,11 +2,14 @@ package br.com.foursys.fourcamp.fourstore.service;
 
 import java.util.List;
 
+import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 import br.com.foursys.fourcamp.fourstore.data.SaleData;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 import br.com.foursys.fourcamp.fourstore.model.Sale;
 
 public class SaleService {
+	
+	ProductController productController = new ProductController();
 	
 	static List<Product> cart;
 	
@@ -34,6 +37,11 @@ public class SaleService {
 	
 	public void clearCart() {
 		cart.clear();
+	}
+	
+	public void decrementStock(String sku, int quantity) {
+		Product product = productController.getProductBySkuObject(sku);
+		productController.updateProductBySku(sku, product.getQuantity() - quantity, null, null);
 	}
 
 }

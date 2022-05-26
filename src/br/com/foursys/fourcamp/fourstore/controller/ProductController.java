@@ -20,6 +20,11 @@ public class ProductController {
 		return product.toString();
 	}
 	
+	public Product getProductBySkuObject(String sku) {
+		Product product = productService.getBySku(sku);
+		return product;
+	}
+	
 	public String deleteProductById(String id) {
 		if(productService.deleteProductById(id)) return "Produto excluído!";
 		return "Não existe um produto com o id " + id;
