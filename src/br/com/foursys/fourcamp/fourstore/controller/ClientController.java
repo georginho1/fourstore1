@@ -4,8 +4,7 @@ import br.com.foursys.fourcamp.fourstore.model.Client;
 import br.com.foursys.fourcamp.fourstore.service.ClientService;
 
 public class ClientController {
-	
-	ClientService clientservice = new ClientService();
+	private static ClientService clientservice = new ClientService();
 	
 	public boolean clientIsRegistered(String cpf) {
 		return clientservice.clientIsRegistered(cpf);
@@ -19,5 +18,4 @@ public class ClientController {
 		Client cliente = new Client(nome, cpf);
 		clientservice.registerClient(cliente);
 	}
-
 }

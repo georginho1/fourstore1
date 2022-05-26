@@ -3,9 +3,10 @@ package br.com.foursys.fourcamp.fourstore.controller;
 import br.com.foursys.fourcamp.fourstore.utils.Validations;
 
 public class MenuController {
-	Validations validations;
+	private static Validations validations;
+	
 	public MenuController() {
-		this.validations=new Validations();
+		validations = new Validations();
 		
 	}
 	public int validationRegexMenu(String entrada, String verificMenu) {

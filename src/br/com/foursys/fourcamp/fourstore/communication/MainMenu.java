@@ -12,7 +12,6 @@ import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
 import br.com.foursys.fourcamp.fourstore.model.Client;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 
-
 public class MainMenu {
 	private static Scanner scanner;
 	private static ProductController productController;
@@ -130,14 +129,13 @@ public class MainMenu {
 			
 			System.out.println("Deseja inserir outro produto?\n 1 - sim\n2 - nao");
 			option = scanner.nextInt();
-			if(option == 1) {
+			if (option == 1) {
 				continue;
-			}else if(option == 2) {
+			} else if (option == 2) {
 				break;
-			}else {
+			} else {
 				System.out.println("Opção invalida");
 			}
-			
 		}
 	
 		Integer resposta;
@@ -172,6 +170,7 @@ public class MainMenu {
 				System.out.println("digite uma resposta válida");
 			}
 		}
+		
 		Integer opcao;
 		String dadosCartaoCredito;
 		String dadosCartaoDebito;
@@ -215,9 +214,7 @@ public class MainMenu {
 				continue;
 			}
 			break;
-
 		}
-
 	}
 
 	private void menuProducts() {

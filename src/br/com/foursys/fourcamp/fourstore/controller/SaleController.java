@@ -13,14 +13,14 @@ import br.com.foursys.fourcamp.fourstore.service.SaleService;
 
 public class SaleController {
 	
-	private ProductService productService = new ProductService();
-	private SaleService saleService = new SaleService();
+	private static ProductService productService = new ProductService();
+	private static SaleService saleService = new SaleService();
 	
 	public String addCart(String sku, Integer quantity) {
 		if(saleService.addCart(sku, quantity)) {
 			return "Produto adicionado com sucesso!";
 		}
-		return "O produto nï¿½o pode ser adicionado";
+		return "O produto não pode ser adicionado";
 	}
 	
 	public String clearCart() {
@@ -54,7 +54,7 @@ public class SaleController {
 			retorno = "\nVenda realizada com sucesso!\n\n" + sale.toString();
 			return retorno;
 		} else {
-			return "Nï¿½o foi possï¿½vel registrar a venda";
+			return "Não foi possível registrar a venda";
 		}
 	}
 	
@@ -76,7 +76,7 @@ public class SaleController {
 	public String saleConsultation() {
 		String retorno = "";
 		if(saleService.listSale().size() == 0) {
-			retorno = "Nï¿½o hï¿½ nunhum histï¿½rico de vendas!";
+			retorno = "Não há nunhum histórico de vendas!";
 			return retorno;
 		}
 		retorno = saleService.listSale().toString();
