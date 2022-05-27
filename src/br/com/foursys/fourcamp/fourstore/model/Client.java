@@ -18,6 +18,10 @@ public class Client {
 
 
 
+	public Client(String pixKey) {
+		this.pixKey = pixKey;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -44,6 +48,6 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return "Cliente:\nnome: " + name + "\nCPF: " + cpf + "\nChave pix: " + pixKey;
+		return "\nNome: " + name + "\nCPF: " + cpf + "\nChave pix: " + pixKey;
 	}	
 }

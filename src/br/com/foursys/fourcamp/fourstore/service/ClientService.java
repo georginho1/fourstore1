@@ -84,4 +84,14 @@ public class ClientService {
 		clientData.save(client);
 		}
 
+	public void registerPix(String pixKey) {
+		Client client = new Client(pixKey);
+		clientData.save(client);
+	}
+
+	public void registerPix(String pixKey, String cpf) {
+		Client client = clientData.findByCPF(cpf);
+		client.setPixKey(pixKey);		
+	}
+
 }
