@@ -48,7 +48,21 @@ public class Validations {
 		}
 		return (sum % 10) == 0;
 	}
-	public boolean validateCpfregex(String cpf) {
+	
+	public boolean validateSkuRegex(String sku) {
+		String pattern = "([0-9]{14})";
+		Pattern regex = Pattern.compile(pattern);
+		
+		Matcher matcher = regex.matcher(sku);
+		
+		if(!matcher.matches()) {
+			return false;
+		}
+		return true;
+
+	}
+	
+	public boolean validateCpfRegex(String cpf) {
 		String pattern = "([0-9]{3}[\\.][0-9]{3}[\\.][0-9]{3}[\\-][0-9]{2})";
 		Pattern regex = Pattern.compile(pattern);
 		

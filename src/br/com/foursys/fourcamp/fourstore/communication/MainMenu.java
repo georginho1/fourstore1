@@ -1,28 +1,29 @@
 package br.com.foursys.fourcamp.fourstore.communication;
 
-
 import java.util.Scanner;
 
 import br.com.foursys.fourcamp.fourstore.controller.ClientController;
 import br.com.foursys.fourcamp.fourstore.controller.MenuController;
 import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 import br.com.foursys.fourcamp.fourstore.controller.SaleController;
+import br.com.foursys.fourcamp.fourstore.model.Product;
 import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
+
 
 
 public class MainMenu {
 	private Scanner scanner;
-	private MenuController menucontroller;
-	private SaleController salecontroller;
-	private ClientController clientcontroller;
-	private ProductController productcontroller;
+	private MenuController menuController;
+	private SaleController saleController;
+	private ClientController clientController;
+	private ProductController productController;
 	
 	public MainMenu() {
-		this.menucontroller = new MenuController();
+		this.menuController = new MenuController();
 		this.scanner = new Scanner(System.in);
-		this.salecontroller = new SaleController();
-		this.clientcontroller = new ClientController();
-		this.productcontroller = new ProductController();
+		this.saleController = new SaleController();
+		this.clientController = new ClientController();
+		this.productController = new ProductController();
 	}
 
 	public void mainMenu() {
@@ -30,7 +31,6 @@ public class MainMenu {
 	}
 
 	private void primaryMenu() {
-
 		Integer option = -1;
 		String entrada;
 
@@ -43,7 +43,7 @@ public class MainMenu {
 			entrada = scanner.next();
 			System.out.println("----------------------------------\n");
 
-			option = menucontroller.validationRegexMenu(entrada, "[0-6]");
+			option = menuController.validationRegexMenu(entrada, "[0-6]");
 
 			switch (option) {
 			case 0:
@@ -61,7 +61,6 @@ public class MainMenu {
 		}
 	}
 
-
 	private void menuSales() {
 		int option = -1;
 		String entrada;
@@ -70,7 +69,7 @@ public class MainMenu {
 			System.out.println("1 - Realizar Venda" + "\n2 - Consultar o histórico de vendas" + "\n0 - Para voltar");
 			entrada = scanner.next();
 
-			option = menucontroller.validationRegexMenu(entrada, "[0-6]");
+			option = menuController.validationRegexMenu(entrada, "[0-6]");
 			switch (option) {
 			case 0: {
 				primaryMenu();
@@ -81,7 +80,7 @@ public class MainMenu {
 				break;
 			}
 			case 2: {
-				String result = salecontroller.saleConsultation();
+				String result = saleController.saleConsultation();
 				System.out.println(result);
 				break;
 			}
@@ -96,13 +95,13 @@ public class MainMenu {
 		String sku;
 		Integer qtt = 0;
 		Integer option;
-		salecontroller.clearCart();
+		saleController.clearCart();
 		
 		while(true) {
 			while(true) {
 				System.out.println("\ndigite o sku: ");
 				sku = scanner.next();
-				if (productcontroller.getProductBySku(sku) == null) {
+				if (productController.getProductBySku(sku) == null) {
 					System.out.println("produto nao existe");
 				} else {
 					break;
@@ -115,7 +114,7 @@ public class MainMenu {
 				qtt = scanner.nextInt();
 				if (qtt < 1) {
 					System.out.println("digite 1 ou mais");
-				} else if (!productcontroller.haveStock(sku, qtt)) {
+				} else if (!productController.haveStock(sku, qtt)) {
 					System.out.println("Quantidade maior do que possuimos" );
 					continue;
 				} else {
@@ -125,7 +124,7 @@ public class MainMenu {
 			ProductController.decrementProduct(sku, qtt);
 				
 			
-			System.out.println(salecontroller.addCart(sku, qtt)); 
+			System.out.println(saleController.addCart(sku, qtt)); 
 			
 			System.out.println("Deseja inserir outro produto?\n 1 - sim\n2 - nao");
 			option = scanner.nextInt();
@@ -151,10 +150,10 @@ public class MainMenu {
 				while (true) {
 					System.out.println("digite o cpf: ");
 					cpf = scanner.next();
-					if (menucontroller.validarCpf(cpf)) {
+					if (menuController.validarCpf(cpf)) {
 						System.out.println("Digite o nome do cliente");
 						nome = scanner.next();
-						clientcontroller.registerClient(nome, cpf);
+						clientController.registerClient(nome, cpf);
 						break;
 					} else {
 						System.out.println("CPF invalido");
@@ -186,7 +185,7 @@ public class MainMenu {
 				System.out.println("Digite o numero do Cartao");
 				dadosCartaoCredito = scanner.next();
 				scanner.nextLine();
-				if(!menucontroller.validationCard(dadosCartaoCredito)) {
+				if(!menuController.validationCard(dadosCartaoCredito)) {
 					System.out.println("Cartao Invalido");
 					continue;
 				}
@@ -194,7 +193,7 @@ public class MainMenu {
 			case 2:
 				paymentmethod = PaymentMethod.CARTAODEDEBITO;
 				dadosCartaoDebito = scanner.next();
-				if(!menucontroller.validationCard(dadosCartaoDebito)) {
+				if(!menuController.validationCard(dadosCartaoDebito)) {
 					System.out.println("Cartao Invalido");
 					continue;
 				}
@@ -207,9 +206,9 @@ public class MainMenu {
 				System.out.println("Digite e chave pix");
 				chavePix = scanner.next();
 				if(cpf == null) {
-					clientcontroller.registerPix(chavePix);
+					clientController.registerPix(chavePix);
 				} else {
-					clientcontroller.registerPix(chavePix, cpf);
+					clientController.registerPix(chavePix, cpf);
 
 				}
 				break;
@@ -222,9 +221,9 @@ public class MainMenu {
 		}
 						
 		if(cpf != null) {
-			System.out.println(salecontroller.saleRegister(paymentmethod, cpf)); 
+			System.out.println(saleController.saleRegister(paymentmethod, cpf)); 
 		} else {
-			System.out.println(salecontroller.saleRegister(paymentmethod)); 
+			System.out.println(saleController.saleRegister(paymentmethod)); 
 		}
 
 	}
@@ -241,7 +240,7 @@ public class MainMenu {
 
 			entrada = scanner.next();
 
-			option = menucontroller.validationRegexMenu(entrada, "[0-8]");
+			option = menuController.validationRegexMenu(entrada, "[0-8]");
 
 			switch (option) {
 			case 0: {
@@ -261,16 +260,16 @@ public class MainMenu {
 				break;
 			}
 			case 4: {
-				String retorno = productcontroller.listProducts();// metodo para listar produtos
+				String retorno = productController.listProducts();// metodo para listar produtos
 				System.out.println(retorno);
 				break;
 			}
 			case 5: {
-				// updateProductById(); metodo para atualizar produtos, encontrando pelo id
+				updateProductById();
 				break;
 			}
 			case 6: {
-				// updateProductBySku(); metodo para atualizar produtos, encontrando pelo sku
+				updateProductBySku();
 				break;
 			}
 			case 7: {
@@ -287,17 +286,135 @@ public class MainMenu {
 		}
 	}
 	
+	private void updateProductById() {
+		String id;
+		while(true) {
+			System.out.print("\nInsira o id do produto: ");
+			id = scanner.next();
+			String idIsValidMessage = productController.getProductById(id);
+			if(idIsValidMessage.equals("Não existe um produto com o id " + id)) {
+				System.out.println(idIsValidMessage + ". Tente novamente.");
+				continue;
+			}
+			break;
+		}
+		
+		this.updateProduct(id, null);
+	}
+	
+	private void updateProductBySku() {
+		String sku;
+		while(true) {
+			System.out.print("\nInsira o sku do produto: ");
+			sku = scanner.next();
+			String skuIsValidMessage = productController.getProductBySku(sku);
+			if(skuIsValidMessage.equals("Não existe um produto com o sku " + sku)) {
+				System.out.println(skuIsValidMessage + ". Tente novamente.");
+				continue;
+			}
+			break;
+		}
+		
+		this.updateProduct(null, sku);
+	}
+	
+	private void updateProduct(String id, String sku) {
+		Integer quantity = Integer.MAX_VALUE;
+		Double purchasePrice = 0.0, salePrice = 0.0;
+		
+		String option;
+		Boolean condition = true;
+		while(condition) {
+			System.out.println("\nQual ação deseja realizar?");
+			System.out.println("1 - Inserir nova quantidade do produto em estoque");
+			System.out.println("2 - Inserir novo preço de compra do produto");
+			System.out.println("3 - Inserir novo preço de venda do produto");
+			System.out.println("4 - Aplicar atualização dos dados");
+			System.out.print("Insira uma opção: ");
+			option = scanner.next();
+			
+			switch(option) {
+				case "1":
+					quantity = this.getNewQuantityProduct();
+					break;
+				case "2":
+					purchasePrice = this.getNewPurchasePrice();
+					break;
+				case "3":
+					salePrice = this.getNewSalePrice();
+					break;
+				case "4":
+					if(id != null) {
+						System.out.println(productController.updateProductById(id, quantity, purchasePrice, salePrice));
+						condition = false;
+					} else if(sku != null) {
+						System.out.println(productController.updateProductBySku(sku, quantity, purchasePrice, salePrice));
+						condition = false;
+					} else {
+						System.out.println("Não foi possível realizar a atualização dos dados. Tente novamente.");
+					}
+					break;
+				default:
+					System.out.println("Opção inválida. Tente novamente.");
+					continue;
+			}
+		}
+	}
+	
+	private Integer getNewQuantityProduct() {
+		Integer quantity;
+		while(true) {
+			System.out.print("\nInsira a nova quantidade em estoque do produto: ");
+			quantity = scanner.nextInt();
+			if(quantity < 0) {
+				System.out.println("Valor inválido. Tente novamente.");
+				continue;
+			}
+			break;
+		}
+		return quantity;
+	}
+	
+	private Double getNewPurchasePrice() {
+		Double purchasePrice;
+		while(true) {
+			System.out.print("\nInsira o novo preço de compra do produto: ");
+			purchasePrice = scanner.nextDouble();
+			if(purchasePrice < 0.0) {
+				System.out.println("Valor inválido. Tente novamente.");
+				continue;
+			}
+			break;
+		}
+		return purchasePrice;
+	}
+	
+	private Double getNewSalePrice() {
+		Double salePrice;
+		while(true) {
+			System.out.print("\nInsira o novo preço de venda do produto: ");
+			salePrice = scanner.nextDouble();
+			if(salePrice < 0.0) {
+				System.out.println("Valor inválido. Tente novamente.");
+				continue;
+			}
+			break;
+		}
+		return salePrice;
+	}
+	
 	public void cadProduct() {
 		String sku;
 		
 		while (true) {
 			System.out.println("Insira o sku do produto");
 			sku = scanner.next();
-			if(!productcontroller.productIsRegistered(sku)) {
+			if(productController.productIsRegistered(sku)) {
+				System.out.println("SKU já cadastrado. \n");
+			} else if(!(productController.validateSku(sku))) {
+				System.out.println("SKU inválido");
+			} else {
 				break;
-			}else {
-				System.out.println("SKU ja cadastrado. \n");
-				mainMenu();
 			}
 		}
 		
@@ -314,7 +431,7 @@ public class MainMenu {
 		System.out.println("Insira o valor de venda do produto");
 		Double salePrice = scanner.nextDouble();
 		
-		String retorno = productcontroller.cadProduct(sku, description, quantity, purchasePrice, salePrice);
+		String retorno = productController.cadProduct(sku, description, quantity, purchasePrice, salePrice);
 		System.out.println(retorno);
 	}
 	
@@ -322,26 +439,34 @@ public class MainMenu {
 	private void getProductById() {
 		System.out.print("\nInsira o id do produto: ");
 		String id = scanner.next();
-		System.out.println(productcontroller.getProductById(id) + "\n");
+		System.out.println(productController.getProductById(id) + "\n");
 	}
 	
 	private void getProductBySku() {
 		System.out.print("\nInsira o sku do produto: ");
 		String sku = scanner.next();
-		System.out.println(productcontroller.getProductBySku(sku) + "\n");
+		if(!(productController.validateSku(sku))) {
+			System.out.println("SKU inválido");
+		} else {
+			System.out.println(productController.getProductBySku(sku) + "\n");
+		}
+		
 	}
 	
 	private void deleteProductById() {
 		System.out.print("\nInsira o id do produto: ");
 		String id = scanner.next();
-		System.out.println(productcontroller.deleteProductById(id) + "\n");
+		System.out.println(productController.deleteProductById(id) + "\n");
 	}
 	
 	private void deleteProductBySku() {
 		System.out.print("\nInsira o sku do produto: ");
 		String sku = scanner.next();
-		System.out.println(productcontroller.deleteProductBySku(sku) + "\n");
+		if(!(productController.validateSku(sku))) {
+			System.out.println("SKU inválido");
+		}else {
+			System.out.println(productController.deleteProductBySku(sku) + "\n");
+		}
 	}
-	
-	}
+}
 

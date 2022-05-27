@@ -36,22 +36,34 @@ public class ProductService {
 			return false;
 		}
 
-		return update(updatedProduct);
+		return update(updatedProduct, originalProduct);
 	}
 	
-	private Boolean update(Product updatedProduct) { 
+	private Boolean update(Product updatedProduct, Product originalProduct) { 
 		Integer updatedQuantity = updatedProduct.getQuantity();
-		if(updatedQuantity == null || updatedQuantity < 0) {
+		if(updatedQuantity == Integer.MAX_VALUE) {
+			updatedProduct.setQuantity(originalProduct.getQuantity()); 
+		}
+		
+		if(updatedQuantity < 0) {
 			return false;
 		}
 		
 		Double updatedPurchasePrice = updatedProduct.getPurchasePrice();
-		if(updatedPurchasePrice == null || updatedPurchasePrice < 0) {
+		if(updatedPurchasePrice == 0.0) {
+			updatedProduct.setPurchasePrice(originalProduct.getPurchasePrice()); 
+		}
+		
+		if(updatedPurchasePrice < 0) {
 			return false;
 		}
 		
 		Double updatedSalePrice = updatedProduct.getSalePrice();
-		if(updatedSalePrice == null || updatedSalePrice < 0) {
+		if(updatedSalePrice == 0.0) {
+			updatedProduct.setSalePrice(originalProduct.getSalePrice()); 
+		}
+		
+		if(updatedSalePrice < 0) {
 			return false;
 		}
 		
