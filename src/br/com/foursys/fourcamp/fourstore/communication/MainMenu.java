@@ -131,11 +131,11 @@ public class MainMenu {
 				break;
 			}
 			case 5: {
-				// updateProductById(); metodo para atualizar produtos, encontrando pelo id
+				updateProductById();
 				break;
 			}
 			case 6: {
-				// updateProductBySku(); metodo para atualizar produtos, encontrando pelo sku
+				updateProductBySku();
 				break;
 			}
 			case 7: {
@@ -150,6 +150,121 @@ public class MainMenu {
 				System.out.println("\nOpção Invalida. Tente Novamente \n");
 			}
 		}
+	}
+	
+	private void updateProductById() {
+		String id;
+		while(true) {
+			System.out.print("\nInsira o id do produto: ");
+			id = scanner.next();
+			String idIsValidMessage = this.productController.getProductById(id);
+			if(idIsValidMessage.equals("Não existe um produto com o id " + id)) {
+				System.out.println(idIsValidMessage + ". Tente novamente.");
+				continue;
+			}
+			break;
+		}
+		
+		this.updateProduct(id, null);
+	}
+	
+	private void updateProductBySku() {
+		String sku;
+		while(true) {
+			System.out.print("\nInsira o sku do produto: ");
+			sku = scanner.next();
+			String skuIsValidMessage = this.productController.getProductBySku(sku);
+			if(skuIsValidMessage.equals("Não existe um produto com o sku " + sku)) {
+				System.out.println(skuIsValidMessage + ". Tente novamente.");
+				continue;
+			}
+			break;
+		}
+		
+		this.updateProduct(null, sku);
+	}
+	
+	private void updateProduct(String id, String sku) {
+		Integer quantity = null;
+		Double purchasePrice = null, salePrice = null;
+		
+		String option;
+		while(true) {
+			System.out.println("\nQual ação deseja realizar?");
+			System.out.println("1 - Inserir nova quantidade do produto em estoque");
+			System.out.println("2 - Inserir novo preço de compra do produto");
+			System.out.println("3 - Inserir novo preço de venda do produto");
+			System.out.println("4 - Aplicar atualização dos dados");
+			System.out.print("Insira uma opção: ");
+			option = scanner.next();
+			
+			switch(option) {
+				case "1":
+					quantity = this.getNewQuantityProduct();
+					break;
+				case "2":
+					purchasePrice = this.getNewPurchasePrice();
+					break;
+				case "3":
+					salePrice = this.getNewSalePrice();
+					break;
+				case "4":
+					if(id != null) {
+						System.out.println(this.productController.updateProductById(id, quantity, purchasePrice, salePrice));
+					} else if(sku != null) {
+						System.out.println(this.productController.updateProductBySku(sku, quantity, purchasePrice, salePrice));
+					} else {
+						System.out.println("Não foi possível realizar a atualização dos dados. Tente novamente.");
+					}
+					break;
+				default:
+					System.out.println("Opção inválida. Tente novamente.");
+					continue;
+			}
+			break;
+		}
+	}
+	
+	private Integer getNewQuantityProduct() {
+		Integer quantity;
+		while(true) {
+			System.out.print("\nInsira a nova quantidade em estoque do produto: ");
+			quantity = scanner.nextInt();
+			if(quantity < 0) {
+				System.out.println("Valor inválido. Tente novamente.");
+				continue;
+			}
+			break;
+		}
+		return quantity;
+	}
+	
+	private Double getNewPurchasePrice() {
+		Double purchasePrice;
+		while(true) {
+			System.out.print("\nInsira o novo preço de compra do produto: ");
+			purchasePrice = scanner.nextDouble();
+			if(purchasePrice < 0.0) {
+				System.out.println("Valor inválido. Tente novamente.");
+				continue;
+			}
+			break;
+		}
+		return purchasePrice;
+	}
+	
+	private Double getNewSalePrice() {
+		Double salePrice;
+		while(true) {
+			System.out.print("\nInsira o novo preço de venda do produto: ");
+			salePrice = scanner.nextDouble();
+			if(salePrice < 0.0) {
+				System.out.println("Valor inválido. Tente novamente.");
+				continue;
+			}
+			break;
+		}
+		return salePrice;
 	}
 	
 	public void cadProduct() {
