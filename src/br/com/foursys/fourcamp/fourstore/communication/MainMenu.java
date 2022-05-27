@@ -100,7 +100,7 @@ public class MainMenu {
 			while(true) {
 				System.out.println("\nDigite o sku: ");
 				sku = scanner.next();
-				if (productController.getProductBySku(sku) == null) {
+				if (productController.getProductBySku(sku) == "Nao existe um produto com o sku " + sku) {
 					System.out.println("Produto nao existe");
 				} else if(!(productController.validateSku(sku))) {
 					System.out.println("SKU inválido");
