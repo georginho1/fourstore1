@@ -6,7 +6,6 @@ import br.com.foursys.fourcamp.fourstore.controller.ClientController;
 import br.com.foursys.fourcamp.fourstore.controller.MenuController;
 import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 import br.com.foursys.fourcamp.fourstore.controller.SaleController;
-import br.com.foursys.fourcamp.fourstore.model.Product;
 import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
 
 
@@ -150,7 +149,9 @@ public class MainMenu {
 				while (true) {
 					System.out.println("digite o cpf: ");
 					cpf = scanner.next();
-					if (menuController.validarCpf(cpf)) {
+					if(!menuController.validateCpfRegex(cpf)) {
+						System.out.println("O cpf deve ter o seguinte formato xxx.xxx.xxx-xx");
+					} else if (menuController.validarCpf(cpf)) {
 						System.out.println("Digite o nome do cliente");
 						nome = scanner.next();
 						clientController.registerClient(nome, cpf);
@@ -309,7 +310,7 @@ public class MainMenu {
 			System.out.print("\nInsira o sku do produto: ");
 			sku = scanner.next();
 			String skuIsValidMessage = productController.getProductBySku(sku);
-			if(skuIsValidMessage.equals("Não existe um produto com o sku " + sku)) {
+			if(skuIsValidMessage.equals("Nao existe um produto com o sku " + sku)) {
 				System.out.println(skuIsValidMessage + ". Tente novamente.");
 				continue;
 			}

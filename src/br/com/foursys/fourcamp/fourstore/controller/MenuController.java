@@ -21,6 +21,10 @@ public class MenuController {
 		
 	}
 	
+	public boolean validateCpfRegex(String cpf) {
+		return validations.validateCpfRegex(cpf);
+	}
+	
 	public boolean validationCard(String acceptedCards) {
 		return validations.validateCard(acceptedCards);
 	}

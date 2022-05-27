@@ -10,7 +10,6 @@ public class Application {
 		MainMenu menu = new MainMenu();
 		
 		menu.mainMenu();
-		
 	}
 
 }

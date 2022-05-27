@@ -53,7 +53,7 @@ public class ProductController {
 	
 	public String getProductBySku(String sku) {
 		Product product = productService.getBySku(sku);
-		if(product == null) return null;
+		if(product == null) return "Nao existe um produto com o sku " + sku;
 		return product.toString();
 	}
 	

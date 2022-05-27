@@ -8,24 +8,24 @@ public class SaleRegistrerMenu {
 		String sku;
 		Integer quantidade;
 		String cpf;
-		boolean buyisvalid=false;
+		boolean buyisvalid = false;
 		String respost;
-		String skuestoque=null;
-		int quantidadeestoque=0;
+		String skuestoque = null;
+		int quantidadeestoque = 0;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("digite o sku");
-		sku=sc.nextLine();
+		sku = sc.nextLine();
 		if(sku.equals(skuestoque)) {
 			System.out.println("digite a quantidade:");
-			quantidade=sc.nextInt();
+			quantidade = sc.nextInt();
 			if(quantidade<quantidadeestoque) {
-				quantidadeestoque-=quantidade;
-				buyisvalid=true;
+				quantidadeestoque -= quantidade;
+				buyisvalid = true;
 				
 				
 			}
 			else {
-				System.out.println("não foi encontrado em estoque só temos "+quantidadeestoque);
+				System.out.println("não foi encontrado em estoque só temos " + quantidadeestoque);
 			}
 			
 		}
@@ -36,8 +36,8 @@ public class SaleRegistrerMenu {
 		if (buyisvalid) {
 			
 			System.out.println("Deseja informar o cpf? sim/não");
-			respost=sc.nextLine();
-			if (respost=="sim") {
+			respost = sc.nextLine();
+			if (respost == "sim") {
 				
 			}
 			
