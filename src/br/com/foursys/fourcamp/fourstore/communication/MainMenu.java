@@ -290,9 +290,10 @@ public class MainMenu {
 		String id;
 		while(true) {
 			System.out.print("\nInsira o id do produto: ");
+						
 			id = scanner.next();
 			String idIsValidMessage = productController.getProductById(id);
-			if(idIsValidMessage.equals("Não existe um produto com o id " + id)) {
+			if(idIsValidMessage.equals("Nao existe um produto com o id " + id)) {
 				System.out.println(idIsValidMessage + ". Tente novamente.");
 				continue;
 			}
