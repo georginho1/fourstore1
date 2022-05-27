@@ -7,7 +7,7 @@ import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
 public class Sale {
 	
 	private Client client;
-	private List<Product> products;
+	private  List<Product> products;
 	private Double amountValue;
 	private PaymentMethod paymentMethod;
 	

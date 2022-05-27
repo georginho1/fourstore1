@@ -1,16 +1,19 @@
 package br.com.foursys.fourcamp.fourstore.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.foursys.fourcamp.fourstore.controller.ProductController;
+import br.com.foursys.fourcamp.fourstore.data.ProductData;
 import br.com.foursys.fourcamp.fourstore.data.SaleData;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 import br.com.foursys.fourcamp.fourstore.model.Sale;
 
 public class SaleService {
 	
-	static List<Product> cart;
+	static ArrayList<Product> cart = new ArrayList<Product>();
 	ProductController productController = new ProductController();
+	ProductData productdata = new ProductData();
 	
 	public void saveSale(Sale sale) {
 		SaleData saleData = new SaleData();
@@ -22,7 +25,7 @@ public class SaleService {
 		return saleData.list();
 	}
 	
-	public Double amountValeu(List<Product> products) {
+	public Double amountValue(List<Product> products) {
 		Double amountValue = 0.0;
 		for(int i = 0; i < products.size(); i++) {
 			amountValue += products.get(i).getSalePrice();
@@ -31,12 +34,11 @@ public class SaleService {
 	}
 	
 	public boolean addCart(String sku, Integer quantity) {
-			if(productController.haveStock(sku, quantity)) {
-				Product product = productController.getProductBySkuObject(sku);
-				cart.add(product);
-				return true;
-			}
-				return false;
+		Product currentProduct = productController.getProductBySkuObject(sku);
+
+		cart.add(currentProduct);
+		return true;
+
 	}
 	
 	public void clearCart() {
@@ -46,5 +48,11 @@ public class SaleService {
 	public List<Product> cart() {
 		return cart;
 	}
+
+	public static ArrayList<Product> getCart() {
+		return cart;
+	}
+	
+	
 
 }

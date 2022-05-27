@@ -42,9 +42,8 @@ public class MainMenu {
 			System.out.println("==========FOURSTORE=============||");
 			System.out.println("1 - Produtos                    ||");
 			System.out.println("2 - Vendas                      ||");
-//			System.out.println("3 - Clientes                    ||");
 			System.out.println("0 - Sair do sistema             ||");
-			System.out.print("Insira uma op��o: ");
+			System.out.print("Insira uma op��o: ");
 			entrada = scanner.nextLine();
 			System.out.println("----------------------------------\n");
 
@@ -60,9 +59,6 @@ public class MainMenu {
 			case 2:
 				this.menuSales();
 				break;
-//				case 3:
-//					this.menuClients();
-//					break;
 			default:
 				System.out.println("\nOpcao Invalida. Tente Novamente. \n");
 			}
@@ -94,7 +90,7 @@ public class MainMenu {
 				break;
 			}
 			default:
-				System.out.println("\nOp��o invalida. Tente Novamente. \n");
+				System.out.println("\nOpcao invalida. Tente Novamente. \n");
 			}
 		}
 
@@ -102,53 +98,57 @@ public class MainMenu {
 
 	private void menuDoSale() {
 		String sku;
-		Product product;
+		//Product product;
 		Integer quantidade = 0;
-		Map<String, Integer> products = new HashMap<>();
+		//Map<String, Integer> products = new HashMap<>();
 		Integer option;
 		
-		while (true) {
-			while (true) {
+		while(true) {
+			while(true) {
 				System.out.println("digite o sku: ");
 				sku = scanner.nextLine();
-				scanner.nextLine();
 				if (productcontroller.getProductBySku(sku) == null) {
-					System.out.println("produto não existe");
+					System.out.println("produto nao existe");
 				} else {
-					System.out.println("digite a quantidade:");
-					quantidade = scanner.nextInt();
-					if (quantidade < 1) {
-						System.out.println("digite 1 ou mais");
-						continue;
-					} else if (!productcontroller.haveStock(sku, quantidade)) {
-						System.out.println("Quantidade maior do que possuimos" );
-						continue;
-					}
 					break;
 				}
-				break;
 			}
-			products.put(sku, quantidade);
+			
+			while(true) {
+				System.out.println("digite a quantidade:");
+				quantidade = scanner.nextInt();
+				if (quantidade < 1) {
+					System.out.println("digite 1 ou mais");
+				} else if (!productcontroller.haveStock(sku, quantidade)) {
+					System.out.println("Quantidade maior do que possuimos" );
+					continue;
+				} else {
+					break;
+				}
+			}
+			
+			System.out.println(salecontroller.addCart(sku, quantidade)); 
 			
 			System.out.println("Deseja inserir outro produto?\n 1 - sim\n2 - nao");
 			option = scanner.nextInt();
+			
 			if(option == 1) {
 				continue;
 			}else if(option == 2) {
 				break;
 			}else {
-				System.out.println("Opção invalida");
-			}
-			
+				System.out.println("Opcao invalida");
+			}	
 		}
-	
+		
+
 		Integer resposta;
-		String cpf;
+		String cpf = null;
 		String nome;
 		Client client;
 
 		while (true) {
-			System.out.println("deseja colocar o cpf? 1-sim ou 2-não ?");
+			System.out.println("deseja colocar o cpf? 1-sim ou 2-nao ?");
 			resposta = scanner.nextInt();
 			if (resposta == 1) {
 				while (true) {
@@ -161,7 +161,7 @@ public class MainMenu {
 						else{
 							System.out.println("Digite o nome do cliente");
 							nome = scanner.next();
-							clientcontroller.registerClient( nome,  cpf);
+							clientcontroller.registerClient(nome, cpf);
 						}
 						break;
 					}
@@ -171,9 +171,11 @@ public class MainMenu {
 			} else if (resposta == 2) {
 				break;
 			} else {
-				System.out.println("digite uma resposta válida");
+				System.out.println("digite uma resposta valida");
 			}
 		}
+		
+		
 		Integer opcao;
 		String dadosCartaoCredito;
 		String dadosCartaoDebito;
@@ -182,14 +184,14 @@ public class MainMenu {
 		
 		while (true) {
 			System.out.println(
-					"Digite a forma de pagamento: 1- cart�o de cr�dito | 2 -cart�o de d�bito | 3- dinheiro| 4-pix");
+					"Digite a forma de pagamento: 1- cartao de credito | 2 -cartao de debito | 3- dinheiro | 4-pix");
 			opcao = scanner.nextInt();
 
 			switch (opcao) {
 			case 1:
 				paymentmethod = PaymentMethod.CARTAODECREDITO;
-				System.out.println("Digite o numero do Cartão");
-				dadosCartaoCredito = scanner.nextLine();
+				System.out.println("Digite o numero do Cartao");
+				dadosCartaoCredito = scanner.next();
 				scanner.nextLine();
 				if(!menucontroller.validationCard(dadosCartaoCredito)) {
 					System.out.println("Cartao Invalido");
@@ -198,9 +200,9 @@ public class MainMenu {
 				break;
 			case 2:
 				paymentmethod = PaymentMethod.CARTAODEDEBITO;
-				dadosCartaoDebito = scanner.nextLine();
+				dadosCartaoDebito = scanner.next();
 				if(!menucontroller.validationCard(dadosCartaoDebito)) {
-					System.out.println("Cartão Invalido");
+					System.out.println("Cartao Invalido");
 					continue;
 				}
 				break;
@@ -213,15 +215,21 @@ public class MainMenu {
 				//metodo para armazenar o pix
 				break;
 			default:
-				System.out.println("op��o inv�lida");
+				System.out.println("opcao invalida");
 				continue;
 			}
 			break;
 
 		}
-
+						
+		if(cpf != null) {
+			System.out.println(salecontroller.saleRegister(paymentmethod, cpf)); 
+		} else {
+			System.out.println(salecontroller.saleRegister(paymentmethod)); 
+		}
 	}
-
+		
+		
 	private void menuProducts() {
 		int option = -1;
 		String entrada;
@@ -274,7 +282,7 @@ public class MainMenu {
 				break;
 			}
 			default:
-				System.out.println("\nOp��o Invalida. Tente Novamente \n");
+				System.out.println("\nOpcao Invalida. Tente Novamente \n");
 			}
 		}
 		
@@ -303,12 +311,12 @@ public class MainMenu {
 			if(!productcontroller.productIsRegistered(sku)) {
 				break;
 			}else {
-				System.out.println("SKU j� cadastrado. \n");
+				System.out.println("SKU ja cadastrado. \n");
 				mainMenu();
 			}
 		}
 		
-		System.out.println("Insira a descri��o do produto");
+		System.out.println("Insira a descricao do produto");
 		scanner.nextLine();
 		String description = scanner.nextLine();
 		
@@ -346,8 +354,8 @@ public class MainMenu {
 	
 	private void deleteProductBySku() {
 		System.out.print("\nInsira o sku do produto: ");
-		String id = scanner.next();
-		System.out.println(productcontroller.deleteProductBySku(id) + "\n");
+		String sku = scanner.next();
+		System.out.println(productcontroller.deleteProductBySku(sku) + "\n");
 	}
 //	private void menuClients() {
 //		

@@ -64,7 +64,7 @@ public class ProductService {
 		return this.deleteProduct(product);
 	}
 	
-	public Boolean deleteProductBySky(String sku) {
+	public Boolean deleteProductBySku(String sku) {
 		Product product = productData.getProductBySku(sku);
 		return this.deleteProduct(product);
 	}
@@ -81,9 +81,14 @@ public class ProductService {
 		String retorno = "";
 		ArrayList<Product> lista = new ArrayList<Product>();
 		lista = productData.listAll();
-		for (Product list : lista) {
-			retorno += list.toString();
+		if(lista.size() != 0) {
+			for (Product list : lista) {
+				retorno += list.toString();
+			}
+		} else {
+			retorno = "\nNão há produtos cadastrados!\n";
 		}
+
 		return retorno;
 	}
 	
