@@ -6,7 +6,6 @@ import br.com.foursys.fourcamp.fourstore.interfaces.DataInterfaces;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 
 
-	
 public class ProductData implements DataInterfaces<Product> {
 	private static ArrayList<Product> productList = new ArrayList<Product>();
 	

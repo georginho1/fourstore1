@@ -4,6 +4,7 @@ import java.util.Scanner;
 import br.com.foursys.fourcamp.fourstore.controller.MenuController;
 import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 import br.com.foursys.fourcamp.fourstore.controller.SaleController;
+import br.com.foursys.fourcamp.fourstore.model.Product;
 
 
 public class MainMenu {
@@ -157,7 +158,7 @@ public class MainMenu {
 		while(true) {
 			System.out.print("\nInsira o id do produto: ");
 			id = scanner.next();
-			String idIsValidMessage = this.productController.getProductById(id);
+			String idIsValidMessage = productController.getProductById(id);
 			if(idIsValidMessage.equals("Não existe um produto com o id " + id)) {
 				System.out.println(idIsValidMessage + ". Tente novamente.");
 				continue;
@@ -173,7 +174,7 @@ public class MainMenu {
 		while(true) {
 			System.out.print("\nInsira o sku do produto: ");
 			sku = scanner.next();
-			String skuIsValidMessage = this.productController.getProductBySku(sku);
+			String skuIsValidMessage = productController.getProductBySku(sku);
 			if(skuIsValidMessage.equals("Não existe um produto com o sku " + sku)) {
 				System.out.println(skuIsValidMessage + ". Tente novamente.");
 				continue;
@@ -185,11 +186,12 @@ public class MainMenu {
 	}
 	
 	private void updateProduct(String id, String sku) {
-		Integer quantity = null;
-		Double purchasePrice = null, salePrice = null;
+		Integer quantity = Integer.MAX_VALUE;
+		Double purchasePrice = 0.0, salePrice = 0.0;
 		
 		String option;
-		while(true) {
+		Boolean condition = true;
+		while(condition) {
 			System.out.println("\nQual ação deseja realizar?");
 			System.out.println("1 - Inserir nova quantidade do produto em estoque");
 			System.out.println("2 - Inserir novo preço de compra do produto");
@@ -210,9 +212,11 @@ public class MainMenu {
 					break;
 				case "4":
 					if(id != null) {
-						System.out.println(this.productController.updateProductById(id, quantity, purchasePrice, salePrice));
+						System.out.println(productController.updateProductById(id, quantity, purchasePrice, salePrice));
+						condition = false;
 					} else if(sku != null) {
-						System.out.println(this.productController.updateProductBySku(sku, quantity, purchasePrice, salePrice));
+						System.out.println(productController.updateProductBySku(sku, quantity, purchasePrice, salePrice));
+						condition = false;
 					} else {
 						System.out.println("Não foi possível realizar a atualização dos dados. Tente novamente.");
 					}
@@ -221,7 +225,6 @@ public class MainMenu {
 					System.out.println("Opção inválida. Tente novamente.");
 					continue;
 			}
-			break;
 		}
 	}
 	

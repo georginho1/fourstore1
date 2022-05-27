@@ -20,7 +20,6 @@ public class Product {
 	private Double purchasePrice;
 	private Double salePrice;
 
-
 	public Product(String sku, Integer quantity, Double purchasePrice, Double salePrice) {
 		this.sku = sku;
 		this.quantity = quantity;
@@ -28,8 +27,6 @@ public class Product {
 		this.salePrice = salePrice;
 		parseSku(sku);
 	}
-	
-
 
 	public Product(String sku, String description, Integer quantity, Double purchasePrice, Double salePrice) {
 		this.sku = sku;
@@ -40,7 +37,6 @@ public class Product {
 		parseSku(sku);
 	}
 	
-	//criei um construtor que passa todos os atributos
 	public Product(String sku, String description, TypeEnum type, SizeEnum size, ColorEnum color, CategoryEnum category, SeasonEnum season, Integer quantity, Double purchasePrice, Double salePrice) {
 		this.sku = sku;
 		//this.id = id;
@@ -145,8 +141,9 @@ public class Product {
 	}
 	
 	public void update(Product product) {
-		this.quantity+=product.getQuantity();
-		this.salePrice=product.getSalePrice();
+		this.quantity = product.getQuantity();
+		this.salePrice = product.getSalePrice();
+		this.purchasePrice = product.getPurchasePrice();
 	}
 
 	private void parseSku(String sku) {
