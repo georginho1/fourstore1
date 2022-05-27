@@ -41,7 +41,7 @@ public class SaleService {
 	
 	public void decrementStock(String sku, int quantity) {
 		Product product = productController.getProductBySkuObject(sku);
-		productController.updateProductBySku(sku, product.getQuantity() - quantity, null, null);
+		product.setQuantity(product.getQuantity() - quantity);
 	}
 
 }
