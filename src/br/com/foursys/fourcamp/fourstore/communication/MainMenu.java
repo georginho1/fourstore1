@@ -98,10 +98,12 @@ public class MainMenu {
 		
 		while(true) {
 			while(true) {
-				System.out.println("\ndigite o sku: ");
+				System.out.println("\nDigite o sku: ");
 				sku = scanner.next();
 				if (productController.getProductBySku(sku) == null) {
-					System.out.println("produto nao existe");
+					System.out.println("Produto nao existe");
+				} else if(!(productController.validateSku(sku))) {
+					System.out.println("SKU inválido");
 				} else {
 					break;
 				}
@@ -109,10 +111,10 @@ public class MainMenu {
 			
 			while(true) {
 				qtt = 0;
-				System.out.println("digite a quantidade:");
+				System.out.println("Digite a quantidade:");
 				qtt = scanner.nextInt();
 				if (qtt < 1) {
-					System.out.println("digite 1 ou mais");
+					System.out.println("Digite 1 ou mais");
 				} else if (!productController.haveStock(sku, qtt)) {
 					System.out.println("Quantidade maior do que possuimos" );
 					continue;
