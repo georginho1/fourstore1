@@ -2,14 +2,12 @@ package br.com.foursys.fourcamp.fourstore.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
 import br.com.foursys.fourcamp.fourstore.model.Client;
 import br.com.foursys.fourcamp.fourstore.model.Product;
 import br.com.foursys.fourcamp.fourstore.model.Sale;
 import br.com.foursys.fourcamp.fourstore.service.ClientService;
-import br.com.foursys.fourcamp.fourstore.service.ProductService;
 import br.com.foursys.fourcamp.fourstore.service.SaleService;
 
 public class SaleController {

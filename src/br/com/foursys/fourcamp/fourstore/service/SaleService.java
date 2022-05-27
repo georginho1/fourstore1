@@ -33,12 +33,17 @@ public class SaleService {
 		return amountValue;
 	}
 	
+	
 	public boolean addCart(String sku, Integer quantity) {
+
 		Product currentProduct = productController.getProductBySkuObject(sku);
-		currentProduct.setQuantity(quantity);
-		cart.add(currentProduct);
+
+		Product productGeneric = new Product(sku, quantity, currentProduct.getPurchasePrice(), currentProduct.getSalePrice());
+
+		productGeneric.setQuantity(quantity);
+		cart.add(productGeneric);
 		return true;
-	}
+		}
 	
 	public void clearCart() {
 		cart.clear();

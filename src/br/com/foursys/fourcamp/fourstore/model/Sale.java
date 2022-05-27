@@ -59,7 +59,8 @@ public class Sale {
 	@Override
 	public String toString() {
 		if(this.client != null) {
-			return "\n\nVenda para o cliente: " +  client.getName() 
+			return "\n\nCliente: " +  client.getName() 
+			 + "\n\nChave pix: " +  client.getPixKey() 
 		     + "\nProdutos: " + products.toString()
 		     + "\nValor total: " + amountValue
 		     + "\nMétodo de pagamento: " + paymentMethod.getDescription() + "\n";
@@ -71,5 +72,7 @@ public class Sale {
 		}
 		
 	}
+	
+
 	
 } 

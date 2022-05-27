@@ -1,8 +1,6 @@
 package br.com.foursys.fourcamp.fourstore.communication;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 import java.util.Scanner;
 
 import br.com.foursys.fourcamp.fourstore.controller.ClientController;
@@ -10,8 +8,6 @@ import br.com.foursys.fourcamp.fourstore.controller.MenuController;
 import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 import br.com.foursys.fourcamp.fourstore.controller.SaleController;
 import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
-import br.com.foursys.fourcamp.fourstore.model.Client;
-import br.com.foursys.fourcamp.fourstore.model.Product;
 
 
 public class MainMenu {
