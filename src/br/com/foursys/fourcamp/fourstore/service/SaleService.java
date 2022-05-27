@@ -28,17 +28,16 @@ public class SaleService {
 	public Double amountValue(List<Product> products) {
 		Double amountValue = 0.0;
 		for(int i = 0; i < products.size(); i++) {
-			amountValue += products.get(i).getSalePrice();
+			amountValue += products.get(i).getSalePrice() * products.get(i).getQuantity();
 		}
 		return amountValue;
 	}
 	
 	public boolean addCart(String sku, Integer quantity) {
 		Product currentProduct = productController.getProductBySkuObject(sku);
-
+		currentProduct.setQuantity(quantity);
 		cart.add(currentProduct);
 		return true;
-
 	}
 	
 	public void clearCart() {
@@ -52,10 +51,5 @@ public class SaleService {
 	public static ArrayList<Product> getCart() {
 		return cart;
 	}
-	
-//	public void decrementStock(String sku, int quantity) {
-//		Product product = productController.getProductBySkuObject(sku);
-//		productController.updateProductBySku(sku, product.getQuantity() - quantity, null, null);
-//	}
 	
 }

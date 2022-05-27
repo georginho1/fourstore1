@@ -98,8 +98,9 @@ public class MainMenu {
 
 	private void menuDoSale() {
 		String sku;
-		Integer quantidade = 0;
+		Integer qtt = 0;
 		Integer option;
+		salecontroller.clearCart();
 		
 		while(true) {
 			while(true) {
@@ -113,21 +114,22 @@ public class MainMenu {
 			}
 			
 			while(true) {
+				qtt = 0;
 				System.out.println("digite a quantidade:");
-				quantidade = scanner.nextInt();
-				if (quantidade < 1) {
+				qtt = scanner.nextInt();
+				if (qtt < 1) {
 					System.out.println("digite 1 ou mais");
-				} else if (!productcontroller.haveStock(sku, quantidade)) {
+				} else if (!productcontroller.haveStock(sku, qtt)) {
 					System.out.println("Quantidade maior do que possuimos" );
 					continue;
 				} else {
 					break;
 				}
 			}
-			ProductController.decrementProduct(sku, quantidade);
+			ProductController.decrementProduct(sku, qtt);
 				
 			
-			System.out.println(salecontroller.addCart(sku, quantidade)); 
+			System.out.println(salecontroller.addCart(sku, qtt)); 
 			
 			System.out.println("Deseja inserir outro produto?\n 1 - sim\n2 - nao");
 			option = scanner.nextInt();
@@ -179,7 +181,7 @@ public class MainMenu {
 		
 		while (true) {
 			System.out.println(
-					"Digite a forma de pagamento: 1- cartao de credito | 2 -cartao de debito | 3- dinheiro | 4-pix");
+					"Digite a forma de pagamento: \n1- cartao de credito \n2 -cartao de debito \n3- dinheiro \n4-pix");
 			opcao = scanner.nextInt();
 
 			switch (opcao) {
@@ -228,8 +230,7 @@ public class MainMenu {
 		} else {
 			System.out.println(salecontroller.saleRegister(paymentmethod)); 
 		}
-		
-		salecontroller.clearCart();
+
 	}
 		
 		

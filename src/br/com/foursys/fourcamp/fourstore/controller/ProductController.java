@@ -17,7 +17,7 @@ public class ProductController {
 			return retorno = "nao foi possivel cadastrar o produto";
 		}
 		
-		retorno = "O produto foi cadastrado com sucesso."
+		retorno = "\nO produto foi cadastrado com sucesso!\n"
 				+ "\n SKU: " + product.getSku()
 				+ "\n ID: " + product.getId()
 				+ "\n Descricao: " + product.getDescription()
