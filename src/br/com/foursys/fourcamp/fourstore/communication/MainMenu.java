@@ -126,6 +126,8 @@ public class MainMenu {
 					break;
 				}
 			}
+			ProductController.decrementProduct(sku, quantidade);
+				
 			
 			System.out.println(salecontroller.addCart(sku, quantidade)); 
 			

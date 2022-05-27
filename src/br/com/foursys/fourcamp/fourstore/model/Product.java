@@ -165,4 +165,10 @@ public class Product {
 				+ "\nCategoria: " + category + "\nEstação: " + season + "\nQuantidade: " + quantity
 				+ "\nPreço de compra: " + purchasePrice + "\nPreço de venda: " + salePrice + "\n\n";
 	}
+
+
+	public void decrementProduct(Integer quantity) {
+		this.quantity -= quantity;
+	}
+	
 }

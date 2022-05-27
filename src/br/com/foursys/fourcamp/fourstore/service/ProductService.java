@@ -108,6 +108,12 @@ public class ProductService {
 	public Product getProductBySku (String sku) {
 		return productData.getProductBySku(sku);
 	}
+
+	//@@@
+	public void decrementProduct(String sku, Integer qtt) {
+		Product product = productData.getProductBySku(sku);
+		product.decrementProduct(qtt);
+		}
 	
 }
 

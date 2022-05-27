@@ -20,6 +20,7 @@ public class SaleController {
 	
 	public String addCart(String sku, Integer quantity) {
 		if(saleService.addCart(sku, quantity)) {
+			//saleService.decrementStock(sku, quantity);
 			return "Produto adicionado com sucesso!";
 		}
 		return "O produto nao pode ser adicionado";
@@ -57,46 +58,6 @@ public class SaleController {
 		return "Venda realizada com sucesso" + sale;
 	}
 	
-//	public String saleRegister(List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
-//		String retorno = "";
-//		if(products != null && amountValue != null && paymentMethod != null) { // trocar
-//			Sale sale = new Sale(products, amountValue, paymentMethod);
-//			//verificarEstoque(List<products>) em service
-//			saleService.saveSale(sale);
-//			retorno = "\nVenda realizada com sucesso!\n\n" + sale.toString();
-//			return retorno;
-//		} else {
-//			return "Nao foi possivel registrar a venda";
-//		}
-//	}
-//	
-//	public String saleRegister(Client client, List<Product> products, Double amountValue, PaymentMethod paymentMethod) {
-//		String retorno = "";
-//		if(client != null && products != null && amountValue != null && paymentMethod != null) { // trocar
-//			Sale sale = new Sale(client, products, amountValue, paymentMethod);
-//			//verificarEstoque(List<products>) em service
-//			saleService.saveSale(sale);
-//			retorno = "\nVenda realizada com sucesso!\n\n" + sale.toString();
-//			return retorno;
-//		} else {
-//			return "Nao foi possivel registrar a venda";
-//		}
-//	}
-//	
-//	public String saleRegister(Client client, Map<String, Integer> products, PaymentMethod paymentMethod) {
-//		List<Product> productList = new ArrayList<>();
-//		for(String sku : products.keySet()) {
-//			Product product = productService.getBySku(sku);
-//			product.setQuantity(products.get(sku));
-//			productList.add(product);
-//		}
-//		
-//		Double amountValue = saleService.amountValeu(productList);
-//		
-//		saleService.saveSale(new Sale(client, productList, amountValue, paymentMethod));
-//		
-//		return "Compra Registrada";
-//	}
 	
 	public String saleConsultation() {
 		String retorno = "";
@@ -113,7 +74,4 @@ public class SaleController {
 		retorno = saleService.amountValue(products);
 		return retorno;
 	}
-
-
-
 }

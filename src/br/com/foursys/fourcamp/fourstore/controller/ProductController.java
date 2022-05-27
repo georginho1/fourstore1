@@ -88,5 +88,10 @@ public class ProductController {
 	public Product getProductBySkuObject (String sku) {
 		return productService.getProductBySku(sku);
 	}
+
+	//@@@
+	public static void decrementProduct(String sku, Integer qtt) {
+		productService.decrementProduct(sku, qtt);
+		}
 }
 
