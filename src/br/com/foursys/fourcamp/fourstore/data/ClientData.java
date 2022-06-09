@@ -49,4 +49,9 @@ public class ClientData implements DataInterfaces<Client> {
 		return cliente;
 	}
 
+	@Override
+	public String toString() {
+		return "\nClientData [listAll()=" + listAll() + "]\n";
+	}
+	
 }

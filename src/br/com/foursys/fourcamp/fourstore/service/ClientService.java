@@ -1,7 +1,6 @@
 package br.com.foursys.fourcamp.fourstore.service;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 import br.com.foursys.fourcamp.fourstore.data.ClientData;
 import br.com.foursys.fourcamp.fourstore.model.Client;
@@ -14,11 +13,9 @@ public class ClientService {
 	public boolean clientIsRegistered(String cpf) {
 		if(clientData.findByCPF(cpf) != null) {
 			return true;
-		}
-		
+		}	
 		return false;
 	}
-	
 	
 	public Client findByCPF(String cpf) {
 		return clientData.findByCPF(cpf);
@@ -36,6 +33,10 @@ public class ClientService {
 	public void registerPix(String pixKey, String cpf) {
 		Client client = clientData.findByCPF(cpf);
 		client.setPixKey(pixKey);		
+	}
+	
+	public List<Client> listAll(){
+		return clientData.listAll();
 	}
 
 }

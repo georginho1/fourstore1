@@ -8,15 +8,13 @@ import br.com.foursys.fourcamp.fourstore.controller.ProductController;
 import br.com.foursys.fourcamp.fourstore.controller.SaleController;
 import br.com.foursys.fourcamp.fourstore.enums.PaymentMethod;
 
-
-
 public class MainMenu {
 	private Scanner scanner;
 	private MenuController menuController;
 	private SaleController saleController;
 	private ClientController clientController;
 	private ProductController productController;
-	
+
 	public MainMenu() {
 		this.menuController = new MenuController();
 		this.scanner = new Scanner(System.in);
@@ -37,6 +35,7 @@ public class MainMenu {
 			System.out.println("\n\n==========FOURSTORE=============||");
 			System.out.println("1 - Produtos                    ||");
 			System.out.println("2 - Vendas                      ||");
+			System.out.println("3 - Clients                     ||");
 			System.out.println("0 - Sair do sistema             ||");
 			System.out.print("Insira uma opção: ");
 			entrada = scanner.next();
@@ -53,6 +52,9 @@ public class MainMenu {
 				break;
 			case 2:
 				this.menuSales();
+				break;
+			case 3:
+				this.menuClients();
 				break;
 			default:
 				System.out.println("\nOpcao Invalida. Tente Novamente. \n");
@@ -95,50 +97,48 @@ public class MainMenu {
 		Integer qtt = 0;
 		Integer option;
 		saleController.clearCart();
-		
-		while(true) {
-			while(true) {
+
+		while (true) {
+			while (true) {
 				System.out.println("\nDigite o sku: ");
 				sku = scanner.next();
 				if (productController.getProductBySku(sku) == "Nao existe um produto com o sku " + sku) {
 					System.out.println("Produto nao existe");
-				} else if(!(productController.validateSku(sku))) {
+				} else if (!(productController.validateSku(sku))) {
 					System.out.println("SKU inválido");
 				} else {
 					break;
 				}
 			}
-			
-			while(true) {
+
+			while (true) {
 				qtt = 0;
 				System.out.println("Digite a quantidade:");
 				qtt = scanner.nextInt();
 				if (qtt < 1) {
 					System.out.println("Digite 1 ou mais");
 				} else if (!productController.haveStock(sku, qtt)) {
-					System.out.println("Quantidade maior do que possuimos" );
+					System.out.println("Quantidade maior do que possuimos");
 					continue;
 				} else {
 					break;
 				}
 			}
 			ProductController.decrementProduct(sku, qtt);
-				
-			
-			System.out.println(saleController.addCart(sku, qtt)); 
-			
-			System.out.println("Deseja inserir outro produto?\n 1 - sim\n2 - nao");
+
+			System.out.println(saleController.addCart(sku, qtt));
+
+			System.out.println("Deseja inserir outro produto?\n 1 - sim\n 2 - nao");
 			option = scanner.nextInt();
-			
-			if(option == 1) {
+
+			if (option == 1) {
 				continue;
-			}else if(option == 2) {
+			} else if (option == 2) {
 				break;
-			}else {
+			} else {
 				System.out.println("Opcao invalida");
-			}	
+			}
 		}
-		
 
 		Integer resposta;
 		String cpf = null;
@@ -151,7 +151,7 @@ public class MainMenu {
 				while (true) {
 					System.out.println("digite o cpf: ");
 					cpf = scanner.next();
-					if(!menuController.validateCpfRegex(cpf)) {
+					if (!menuController.validateCpfRegex(cpf)) {
 						System.out.println("O cpf deve ter o seguinte formato xxx.xxx.xxx-xx");
 					} else if (menuController.validarCpf(cpf)) {
 						System.out.println("Digite o nome do cliente");
@@ -169,14 +169,13 @@ public class MainMenu {
 				System.out.println("digite uma resposta valida");
 			}
 		}
-		
-		
+
 		Integer opcao;
 		String dadosCartaoCredito;
 		String dadosCartaoDebito;
 		String chavePix;
 		PaymentMethod paymentmethod;
-		
+
 		while (true) {
 			System.out.println(
 					"Digite a forma de pagamento: \n1- cartao de credito \n2 -cartao de debito \n3- dinheiro \n4-pix");
@@ -188,7 +187,7 @@ public class MainMenu {
 				System.out.println("Digite o numero do Cartao");
 				dadosCartaoCredito = scanner.next();
 				scanner.nextLine();
-				if(!menuController.validationCard(dadosCartaoCredito)) {
+				if (!menuController.validationCard(dadosCartaoCredito)) {
 					System.out.println("Cartao Invalido");
 					continue;
 				}
@@ -196,7 +195,7 @@ public class MainMenu {
 			case 2:
 				paymentmethod = PaymentMethod.CARTAODEDEBITO;
 				dadosCartaoDebito = scanner.next();
-				if(!menuController.validationCard(dadosCartaoDebito)) {
+				if (!menuController.validationCard(dadosCartaoDebito)) {
 					System.out.println("Cartao Invalido");
 					continue;
 				}
@@ -208,7 +207,7 @@ public class MainMenu {
 				paymentmethod = PaymentMethod.PIX;
 				System.out.println("Digite e chave pix");
 				chavePix = scanner.next();
-				if(cpf == null) {
+				if (cpf == null) {
 					clientController.registerPix(chavePix);
 				} else {
 					clientController.registerPix(chavePix, cpf);
@@ -222,16 +221,56 @@ public class MainMenu {
 			break;
 
 		}
-						
-		if(cpf != null) {
-			System.out.println(saleController.saleRegister(paymentmethod, cpf)); 
+
+		if (cpf != null) {
+			System.out.println(saleController.saleRegister(paymentmethod, cpf));
 		} else {
-			System.out.println(saleController.saleRegister(paymentmethod)); 
+			System.out.println(saleController.saleRegister(paymentmethod));
 		}
 
 	}
-		
-		
+
+	private void menuClients() {
+		int option = -1;
+		String entrada;
+		String nome;
+		String cpf;
+
+		while (option != 0) {
+			System.out.println(
+					"1 - Para cadastrar cliente \n2 - Para listar todos os clientes cadastrados \n0 - Para voltar");
+
+			entrada = scanner.next();
+			option = menuController.validationRegexMenu(entrada, "[0-2]");
+
+			switch (option) {
+			case 0:
+				primaryMenu();
+				break;
+			case 1:
+				System.out.println("\nDigite o nome do cliente");
+				scanner.nextLine();
+				nome = scanner.nextLine();
+				while (true) {
+					System.out.println("\nDigite o cpf do cliente");
+					cpf = scanner.next();
+					if (menuController.validateCpfRegex(cpf)) {
+						clientController.registerClient(nome, cpf);
+						break;
+					} else {
+						System.out.println("O cpf deve ter o seguinte formato xxx.xxx.xxx-xx");
+					}
+				}
+				break;
+			case 2:
+				System.out.println(clientController.listAll());
+				break;
+			default:
+				System.out.println("\nOpcao invalida. Tente Novamente \n");
+			}
+		}
+	}
+
 	private void menuProducts() {
 		int option = -1;
 		String entrada;
@@ -288,47 +327,47 @@ public class MainMenu {
 			}
 		}
 	}
-	
+
 	private void updateProductById() {
 		String id;
-		while(true) {
+		while (true) {
 			System.out.print("\nInsira o id do produto: ");
-						
+
 			id = scanner.next();
 			String idIsValidMessage = productController.getProductById(id);
-			if(idIsValidMessage.equals("Nao existe um produto com o id " + id)) {
+			if (idIsValidMessage.equals("Nao existe um produto com o id " + id)) {
 				System.out.println(idIsValidMessage + ". Tente novamente.");
 				continue;
 			}
 			break;
 		}
-		
+
 		this.updateProduct(id, null);
 	}
-	
+
 	private void updateProductBySku() {
 		String sku;
-		while(true) {
+		while (true) {
 			System.out.print("\nInsira o sku do produto: ");
 			sku = scanner.next();
 			String skuIsValidMessage = productController.getProductBySku(sku);
-			if(skuIsValidMessage.equals("Nao existe um produto com o sku " + sku)) {
+			if (skuIsValidMessage.equals("Nao existe um produto com o sku " + sku)) {
 				System.out.println(skuIsValidMessage + ". Tente novamente.");
 				continue;
 			}
 			break;
 		}
-		
+
 		this.updateProduct(null, sku);
 	}
-	
+
 	private void updateProduct(String id, String sku) {
 		Integer quantity = Integer.MAX_VALUE;
 		Double purchasePrice = 0.0, salePrice = 0.0;
-		
+
 		String option;
 		Boolean condition = true;
-		while(condition) {
+		while (condition) {
 			System.out.println("\nQual ação deseja realizar?");
 			System.out.println("1 - Inserir nova quantidade do produto em estoque");
 			System.out.println("2 - Inserir novo preço de compra do produto");
@@ -336,41 +375,41 @@ public class MainMenu {
 			System.out.println("4 - Aplicar atualização dos dados");
 			System.out.print("Insira uma opção: ");
 			option = scanner.next();
-			
-			switch(option) {
-				case "1":
-					quantity = this.getNewQuantityProduct();
-					break;
-				case "2":
-					purchasePrice = this.getNewPurchasePrice();
-					break;
-				case "3":
-					salePrice = this.getNewSalePrice();
-					break;
-				case "4":
-					if(id != null) {
-						System.out.println(productController.updateProductById(id, quantity, purchasePrice, salePrice));
-						condition = false;
-					} else if(sku != null) {
-						System.out.println(productController.updateProductBySku(sku, quantity, purchasePrice, salePrice));
-						condition = false;
-					} else {
-						System.out.println("Não foi possível realizar a atualização dos dados. Tente novamente.");
-					}
-					break;
-				default:
-					System.out.println("Opção inválida. Tente novamente.");
-					continue;
+
+			switch (option) {
+			case "1":
+				quantity = this.getNewQuantityProduct();
+				break;
+			case "2":
+				purchasePrice = this.getNewPurchasePrice();
+				break;
+			case "3":
+				salePrice = this.getNewSalePrice();
+				break;
+			case "4":
+				if (id != null) {
+					System.out.println(productController.updateProductById(id, quantity, purchasePrice, salePrice));
+					condition = false;
+				} else if (sku != null) {
+					System.out.println(productController.updateProductBySku(sku, quantity, purchasePrice, salePrice));
+					condition = false;
+				} else {
+					System.out.println("Não foi possível realizar a atualização dos dados. Tente novamente.");
+				}
+				break;
+			default:
+				System.out.println("Opção inválida. Tente novamente.");
+				continue;
 			}
 		}
 	}
-	
+
 	private Integer getNewQuantityProduct() {
 		Integer quantity;
-		while(true) {
+		while (true) {
 			System.out.print("\nInsira a nova quantidade em estoque do produto: ");
 			quantity = scanner.nextInt();
-			if(quantity < 0) {
+			if (quantity < 0) {
 				System.out.println("Valor inválido. Tente novamente.");
 				continue;
 			}
@@ -378,13 +417,13 @@ public class MainMenu {
 		}
 		return quantity;
 	}
-	
+
 	private Double getNewPurchasePrice() {
 		Double purchasePrice;
-		while(true) {
+		while (true) {
 			System.out.print("\nInsira o novo preço de compra do produto: ");
 			purchasePrice = scanner.nextDouble();
-			if(purchasePrice < 0.0) {
+			if (purchasePrice < 0.0) {
 				System.out.println("Valor inválido. Tente novamente.");
 				continue;
 			}
@@ -392,13 +431,13 @@ public class MainMenu {
 		}
 		return purchasePrice;
 	}
-	
+
 	private Double getNewSalePrice() {
 		Double salePrice;
-		while(true) {
+		while (true) {
 			System.out.print("\nInsira o novo preço de venda do produto: ");
 			salePrice = scanner.nextDouble();
-			if(salePrice < 0.0) {
+			if (salePrice < 0.0) {
 				System.out.println("Valor inválido. Tente novamente.");
 				continue;
 			}
@@ -406,71 +445,69 @@ public class MainMenu {
 		}
 		return salePrice;
 	}
-	
+
 	public void cadProduct() {
 		String sku;
-		
+
 		while (true) {
 			System.out.println("Insira o sku do produto");
 			sku = scanner.next();
-			if(productController.productIsRegistered(sku)) {
+			if (productController.productIsRegistered(sku)) {
 				System.out.println("SKU já cadastrado. \n");
-			} else if(!(productController.validateSku(sku))) {
+			} else if (!(productController.validateSku(sku))) {
 				System.out.println("SKU inválido");
 			} else {
 				break;
 			}
 		}
-		
+
 		System.out.println("Insira a descricao do produto");
 		scanner.nextLine();
 		String description = scanner.nextLine();
-		
+
 		System.out.println("Insira a quantidade do produto");
 		Integer quantity = scanner.nextInt();
-		
+
 		System.out.println("Insira o valor de compra do produto");
 		Double purchasePrice = scanner.nextDouble();
-		
+
 		System.out.println("Insira o valor de venda do produto");
 		Double salePrice = scanner.nextDouble();
-		
+
 		String retorno = productController.cadProduct(sku, description, quantity, purchasePrice, salePrice);
 		System.out.println(retorno);
 	}
-	
-	
+
 	private void getProductById() {
 		System.out.print("\nInsira o id do produto: ");
 		String id = scanner.next();
 		System.out.println(productController.getProductById(id) + "\n");
 	}
-	
+
 	private void getProductBySku() {
 		System.out.print("\nInsira o sku do produto: ");
 		String sku = scanner.next();
-		if(!(productController.validateSku(sku))) {
+		if (!(productController.validateSku(sku))) {
 			System.out.println("SKU inválido");
 		} else {
 			System.out.println(productController.getProductBySku(sku) + "\n");
 		}
-		
+
 	}
-	
+
 	private void deleteProductById() {
 		System.out.print("\nInsira o id do produto: ");
 		String id = scanner.next();
 		System.out.println(productController.deleteProductById(id) + "\n");
 	}
-	
+
 	private void deleteProductBySku() {
 		System.out.print("\nInsira o sku do produto: ");
 		String sku = scanner.next();
-		if(!(productController.validateSku(sku))) {
+		if (!(productController.validateSku(sku))) {
 			System.out.println("SKU inválido");
-		}else {
+		} else {
 			System.out.println(productController.deleteProductBySku(sku) + "\n");
 		}
 	}
 }
-

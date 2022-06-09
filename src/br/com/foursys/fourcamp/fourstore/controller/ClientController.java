@@ -29,4 +29,7 @@ public class ClientController {
 		clientService.registerPix(chavePix, cpf);
 	}
 
+	public String listAll() {
+		return clientService.listAll().toString();
+	}
 }
